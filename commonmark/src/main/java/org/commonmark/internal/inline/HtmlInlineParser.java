@@ -3,7 +3,6 @@ package org.commonmark.internal.inline;
 import org.commonmark.node.HtmlInline;
 import org.commonmark.parser.beta.*;
 import org.commonmark.text.AsciiMatcher;
-
 import java.util.Set;
 
 /**
@@ -15,58 +14,21 @@ public class HtmlInlineParser implements InlineContentParser {
 
     // spec: A tag name consists of an ASCII letter followed by zero or more ASCII letters, digits, or hyphens (-).
     private static final AsciiMatcher tagNameStart = asciiLetter;
+
     private static final AsciiMatcher tagNameContinue = tagNameStart.newBuilder().range('0', '9').c('-').build();
 
     // spec: An attribute name consists of an ASCII letter, _, or :, followed by zero or more ASCII letters, digits,
     // _, ., :, or -. (Note: This is the XML specification restricted to ASCII. HTML5 is laxer.)
     private static final AsciiMatcher attributeStart = asciiLetter.newBuilder().c('_').c(':').build();
+
     private static final AsciiMatcher attributeContinue = attributeStart.newBuilder().range('0', '9').c('.').c('-').build();
+
     // spec: An unquoted attribute value is a nonempty string of characters not including whitespace, ", ', =, <, >, or `.
-    private static final AsciiMatcher attributeValueEnd = AsciiMatcher.builder()
-            .c(' ').c('\t').c('\n').c('\u000B').c('\f').c('\r')
-            .c('"').c('\'').c('=').c('<').c('>').c('`')
-            .build();
+    private static final AsciiMatcher attributeValueEnd = AsciiMatcher.builder().c(' ').c('\t').c('\n').c('\u000B').c('\f').c('\r').c('"').c('\'').c('=').c('<').c('>').c('`').build();
 
     @Override
     public ParsedInline tryParse(InlineParserState inlineParserState) {
-        Scanner scanner = inlineParserState.scanner();
-        Position start = scanner.position();
-        // Skip over `<`
-        scanner.next();
-
-        char c = scanner.peek();
-        if (tagNameStart.matches(c)) {
-            if (tryOpenTag(scanner)) {
-                return htmlInline(start, scanner);
-            }
-        } else if (c == '/') {
-            if (tryClosingTag(scanner)) {
-                return htmlInline(start, scanner);
-            }
-        } else if (c == '?') {
-            if (tryProcessingInstruction(scanner)) {
-                return htmlInline(start, scanner);
-            }
-        } else if (c == '!') {
-            // comment, declaration or CDATA
-            scanner.next();
-            c = scanner.peek();
-            if (c == '-') {
-                if (tryComment(scanner)) {
-                    return htmlInline(start, scanner);
-                }
-            } else if (c == '[') {
-                if (tryCdata(scanner)) {
-                    return htmlInline(start, scanner);
-                }
-            } else if (asciiLetter.matches(c)) {
-                if (tryDeclaration(scanner)) {
-                    return htmlInline(start, scanner);
-                }
-            }
-        }
-
-        return ParsedInline.none();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static ParsedInline htmlInline(Position start, Scanner scanner) {
@@ -108,12 +70,10 @@ public class HtmlInlineParser implements InlineContentParser {
                         return false;
                     }
                 }
-
                 // Whitespace is required between attributes
                 whitespace = scanner.whitespace() >= 1;
             }
         }
-
         scanner.next('/');
         return scanner.next('>');
     }
@@ -146,17 +106,14 @@ public class HtmlInlineParser implements InlineContentParser {
         // spec: An [HTML comment](@) consists of `<!-->`, `<!--->`, or  `<!--`, a string of
         // characters not including the string `-->`, and `-->` (see the
         // [HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#markup-declaration-open-state)).
-
         // Skip first `-`
         scanner.next();
         if (!scanner.next('-')) {
             return false;
         }
-
         if (scanner.next('>') || scanner.next("->")) {
             return true;
         }
-
         while (scanner.find('-') >= 0) {
             if (scanner.next("-->")) {
                 return true;
@@ -164,17 +121,14 @@ public class HtmlInlineParser implements InlineContentParser {
                 scanner.next();
             }
         }
-
         return false;
     }
 
     private static boolean tryCdata(Scanner scanner) {
         // spec: A CDATA section consists of the string <![CDATA[, a string of characters not including the string ]]>,
         // and the string ]]>.
-
         // Skip `[`
         scanner.next();
-
         if (scanner.next("CDATA[")) {
             while (scanner.find(']') >= 0) {
                 if (scanner.next("]]>")) {
@@ -184,7 +138,6 @@ public class HtmlInlineParser implements InlineContentParser {
                 }
             }
         }
-
         return false;
     }
 
@@ -206,12 +159,12 @@ public class HtmlInlineParser implements InlineContentParser {
 
         @Override
         public Set<Character> getTriggerCharacters() {
-            return Set.of('<');
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public InlineContentParser create() {
-            return new HtmlInlineParser();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

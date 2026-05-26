@@ -14,6 +14,6 @@ public class Alert extends CustomBlock {
     }
 
     public String getType() {
-        return type;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

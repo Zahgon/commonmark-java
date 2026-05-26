@@ -13,7 +13,7 @@ public class InsTextContentNodeRenderer extends InsNodeRenderer {
 
     @Override
     public void render(Node node) {
-        renderChildren(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

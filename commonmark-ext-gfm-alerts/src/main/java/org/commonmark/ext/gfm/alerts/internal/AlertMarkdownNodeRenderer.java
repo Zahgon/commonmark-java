@@ -8,6 +8,7 @@ import org.commonmark.renderer.markdown.MarkdownWriter;
 public class AlertMarkdownNodeRenderer extends AlertNodeRenderer {
 
     private final MarkdownWriter writer;
+
     private final MarkdownNodeRendererContext context;
 
     public AlertMarkdownNodeRenderer(MarkdownNodeRendererContext context) {
@@ -17,14 +18,7 @@ public class AlertMarkdownNodeRenderer extends AlertNodeRenderer {
 
     @Override
     protected void renderAlert(Alert alert) {
-        // First line: > [!TYPE]
-        writer.writePrefix("> ");
-        writer.pushPrefix("> ");
-        writer.raw("[!" + alert.getType() + "]");
-        writer.line();
-        renderChildren(alert);
-        writer.popPrefix();
-        writer.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

@@ -14,14 +14,14 @@ public abstract class BlockStart {
      * Result for when there is no block start.
      */
     public static BlockStart none() {
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Start block(s) with the specified parser(s).
      */
     public static BlockStart of(BlockParser... blockParsers) {
-        return new BlockStartImpl(blockParsers);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -64,5 +64,4 @@ public abstract class BlockStart {
      *              paragraph
      */
     public abstract BlockStart replaceParagraphLines(int lines);
-
 }

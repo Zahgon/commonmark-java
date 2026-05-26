@@ -5,7 +5,9 @@ import org.commonmark.parser.beta.ParsedInline;
 import org.commonmark.parser.beta.Position;
 
 public class ParsedInlineImpl implements ParsedInline {
+
     private final Node node;
+
     private final Position position;
 
     public ParsedInlineImpl(Node node, Position position) {
@@ -14,10 +16,10 @@ public class ParsedInlineImpl implements ParsedInline {
     }
 
     public Node getNode() {
-        return node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Position getPosition() {
-        return position;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

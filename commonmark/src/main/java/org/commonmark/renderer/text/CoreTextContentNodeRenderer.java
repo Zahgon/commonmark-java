@@ -2,7 +2,6 @@ package org.commonmark.renderer.text;
 
 import org.commonmark.node.*;
 import org.commonmark.renderer.NodeRenderer;
-
 import java.util.Set;
 
 /**
@@ -11,6 +10,7 @@ import java.util.Set;
 public class CoreTextContentNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     protected final TextContentNodeRendererContext context;
+
     private final TextContentWriter textContent;
 
     private ListHolder listHolder;
@@ -22,207 +22,107 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
 
     @Override
     public Set<Class<? extends Node>> getNodeTypes() {
-        return Set.of(
-                Document.class,
-                Heading.class,
-                Paragraph.class,
-                BlockQuote.class,
-                BulletList.class,
-                FencedCodeBlock.class,
-                HtmlBlock.class,
-                ThematicBreak.class,
-                IndentedCodeBlock.class,
-                Link.class,
-                ListItem.class,
-                OrderedList.class,
-                Image.class,
-                Emphasis.class,
-                StrongEmphasis.class,
-                Text.class,
-                Code.class,
-                HtmlInline.class,
-                SoftLineBreak.class,
-                HardLineBreak.class
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void render(Node node) {
-        node.accept(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Document document) {
-        // No rendering itself
-        visitChildren(document);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(BlockQuote blockQuote) {
-        // LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-        textContent.write('\u00AB');
-        visitChildren(blockQuote);
-        textContent.resetBlock();
-        // RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-        textContent.write('\u00BB');
-
-        textContent.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(BulletList bulletList) {
-        textContent.pushTight(bulletList.isTight());
-        listHolder = new BulletListHolder(listHolder, bulletList);
-        visitChildren(bulletList);
-        textContent.popTight();
-        textContent.block();
-        listHolder = listHolder.getParent();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Code code) {
-        textContent.write('\"');
-        textContent.write(code.getLiteral());
-        textContent.write('\"');
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(FencedCodeBlock fencedCodeBlock) {
-        var literal = stripTrailingNewline(fencedCodeBlock.getLiteral());
-        if (stripNewlines()) {
-            textContent.writeStripped(literal);
-        } else {
-            textContent.write(literal);
-        }
-        textContent.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(HardLineBreak hardLineBreak) {
-        if (stripNewlines()) {
-            textContent.whitespace();
-        } else {
-            textContent.line();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Heading heading) {
-        visitChildren(heading);
-        if (stripNewlines()) {
-            textContent.write(": ");
-        } else {
-            textContent.block();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(ThematicBreak thematicBreak) {
-        if (!stripNewlines()) {
-            textContent.write("***");
-        }
-        textContent.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(HtmlInline htmlInline) {
-        writeText(htmlInline.getLiteral());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(HtmlBlock htmlBlock) {
-        writeText(htmlBlock.getLiteral());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Image image) {
-        writeLink(image, image.getTitle(), image.getDestination());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(IndentedCodeBlock indentedCodeBlock) {
-        var literal = stripTrailingNewline(indentedCodeBlock.getLiteral());
-        if (stripNewlines()) {
-            textContent.writeStripped(literal);
-        } else {
-            textContent.write(literal);
-        }
-        textContent.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Link link) {
-        writeLink(link, link.getTitle(), link.getDestination());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(ListItem listItem) {
-        if (listHolder != null && listHolder instanceof OrderedListHolder) {
-            var orderedListHolder = (OrderedListHolder) listHolder;
-            var marker = orderedListHolder.getCounter() + orderedListHolder.getDelimiter();
-            var spaces = " ";
-            textContent.write(marker);
-            textContent.write(spaces);
-            textContent.pushPrefix(repeat(" ", marker.length() + spaces.length()));
-            visitChildren(listItem);
-            textContent.block();
-            textContent.popPrefix();
-            orderedListHolder.increaseCounter();
-        } else if (listHolder != null && listHolder instanceof BulletListHolder) {
-            BulletListHolder bulletListHolder = (BulletListHolder) listHolder;
-            if (!stripNewlines()) {
-                var marker = bulletListHolder.getMarker();
-                var spaces = " ";
-                textContent.write(marker);
-                textContent.write(spaces);
-                textContent.pushPrefix(repeat(" ", marker.length() + spaces.length()));
-            }
-            visitChildren(listItem);
-            textContent.block();
-            if (!stripNewlines()) {
-                textContent.popPrefix();
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(OrderedList orderedList) {
-        textContent.pushTight(orderedList.isTight());
-        listHolder = new OrderedListHolder(listHolder, orderedList);
-        visitChildren(orderedList);
-        textContent.popTight();
-        textContent.block();
-        listHolder = listHolder.getParent();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Paragraph paragraph) {
-        visitChildren(paragraph);
-        textContent.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(SoftLineBreak softLineBreak) {
-        if (stripNewlines()) {
-            textContent.whitespace();
-        } else {
-            textContent.line();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Text text) {
-        writeText(text.getLiteral());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void visitChildren(Node parent) {
-        Node node = parent.getFirstChild();
-        while (node != null) {
-            Node next = node.getNext();
-            context.render(node);
-            node = next;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void writeText(String text) {
@@ -237,7 +137,6 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
         boolean hasChild = node.getFirstChild() != null;
         boolean hasTitle = title != null && !title.equals(destination);
         boolean hasDestination = destination != null && !destination.isEmpty();
-
         if (hasChild) {
             textContent.write('"');
             visitChildren(node);
@@ -247,7 +146,6 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
                 textContent.write('(');
             }
         }
-
         if (hasTitle) {
             textContent.write(title);
             if (hasDestination) {
@@ -255,11 +153,9 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
                 textContent.whitespace();
             }
         }
-
         if (hasDestination) {
             textContent.write(destination);
         }
-
         if (hasChild && (hasTitle || hasDestination)) {
             textContent.write(')');
         }
@@ -287,6 +183,7 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
     }
 
     private static class BulletListHolder extends ListHolder {
+
         private final String marker;
 
         public BulletListHolder(ListHolder parent, BulletList list) {
@@ -295,11 +192,12 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
         }
 
         public String getMarker() {
-            return marker;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private abstract static class ListHolder {
+
         private final ListHolder parent;
 
         ListHolder(ListHolder parent) {
@@ -307,12 +205,14 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
         }
 
         public ListHolder getParent() {
-            return parent;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static class OrderedListHolder extends ListHolder {
+
         private final String delimiter;
+
         private int counter;
 
         public OrderedListHolder(ListHolder parent, OrderedList list) {
@@ -322,15 +222,15 @@ public class CoreTextContentNodeRenderer extends AbstractVisitor implements Node
         }
 
         public String getDelimiter() {
-            return delimiter;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public int getCounter() {
-            return counter;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public void increaseCounter() {
-            counter++;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

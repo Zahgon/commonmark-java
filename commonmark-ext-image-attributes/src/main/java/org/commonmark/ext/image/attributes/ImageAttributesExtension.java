@@ -22,16 +22,16 @@ public class ImageAttributesExtension implements Parser.ParserExtension, HtmlRen
     }
 
     public static Extension create() {
-        return new ImageAttributesExtension();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customDelimiterProcessor(new ImageAttributesDelimiterProcessor());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.attributeProviderFactory(context -> ImageAttributesAttributeProvider.create());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

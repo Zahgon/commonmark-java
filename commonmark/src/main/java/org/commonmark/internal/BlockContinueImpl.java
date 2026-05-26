@@ -5,7 +5,9 @@ import org.commonmark.parser.block.BlockContinue;
 public class BlockContinueImpl extends BlockContinue {
 
     private final int newIndex;
+
     private final int newColumn;
+
     private final boolean finalize;
 
     public BlockContinueImpl(int newIndex, int newColumn, boolean finalize) {
@@ -15,15 +17,14 @@ public class BlockContinueImpl extends BlockContinue {
     }
 
     public int getNewIndex() {
-        return newIndex;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getNewColumn() {
-        return newColumn;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isFinalize() {
-        return finalize;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

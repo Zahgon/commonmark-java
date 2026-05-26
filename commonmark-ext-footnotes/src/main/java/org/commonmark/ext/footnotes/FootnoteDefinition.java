@@ -21,7 +21,6 @@ public class FootnoteDefinition extends CustomBlock {
     }
 
     public String getLabel() {
-        return label;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
-

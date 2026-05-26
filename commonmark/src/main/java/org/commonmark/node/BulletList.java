@@ -18,18 +18,18 @@ public class BulletList extends ListBlock {
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the bullet list marker that was used, e.g. {@code -}, {@code *} or {@code +}, if available, or null otherwise
      */
     public String getMarker() {
-        return marker;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setMarker(String marker) {
-        this.marker = marker;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

@@ -5,7 +5,6 @@ import org.commonmark.internal.renderer.NodeRendererMap;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.NodeRenderer;
 import org.commonmark.renderer.Renderer;
-
 import java.util.*;
 
 /**
@@ -31,14 +30,15 @@ public class MarkdownRenderer implements Renderer {
         this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
         // Add as last. This means clients can override the rendering of core nodes if they want.
         this.nodeRendererFactories.add(new MarkdownNodeRendererFactory() {
+
             @Override
             public NodeRenderer create(MarkdownNodeRendererContext context) {
-                return new CoreMarkdownNodeRenderer(context);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public Set<Character> getSpecialCharacters() {
-                return Set.of();
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         });
     }
@@ -49,20 +49,17 @@ public class MarkdownRenderer implements Renderer {
      * @return a builder
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void render(Node node, Appendable output) {
-        RendererContext context = new RendererContext(new MarkdownWriter(output));
-        context.render(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String render(Node node) {
-        StringBuilder sb = new StringBuilder();
-        render(node, sb);
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -76,7 +73,7 @@ public class MarkdownRenderer implements Renderer {
          * @return the configured {@link MarkdownRenderer}
          */
         public MarkdownRenderer build() {
-            return new MarkdownRenderer(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -90,8 +87,7 @@ public class MarkdownRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder nodeRendererFactory(MarkdownNodeRendererFactory nodeRendererFactory) {
-            this.nodeRendererFactories.add(nodeRendererFactory);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -99,13 +95,7 @@ public class MarkdownRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
-            for (Extension extension : extensions) {
-                if (extension instanceof MarkdownRendererExtension) {
-                    MarkdownRendererExtension markdownRendererExtension = (MarkdownRendererExtension) extension;
-                    markdownRendererExtension.extend(this);
-                }
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -123,8 +113,11 @@ public class MarkdownRenderer implements Renderer {
     }
 
     private class RendererContext implements MarkdownNodeRendererContext {
+
         private final MarkdownWriter writer;
+
         private final NodeRendererMap nodeRendererMap = new NodeRendererMap();
+
         private final Set<Character> additionalTextEscapes;
 
         private RendererContext(MarkdownWriter writer) {
@@ -135,7 +128,6 @@ public class MarkdownRenderer implements Renderer {
                 escapes.addAll(factory.getSpecialCharacters());
             }
             additionalTextEscapes = Collections.unmodifiableSet(escapes);
-
             for (var factory : nodeRendererFactories) {
                 // Pass in this as context here, which uses the fields set above
                 var renderer = factory.create(this);
@@ -145,17 +137,17 @@ public class MarkdownRenderer implements Renderer {
 
         @Override
         public MarkdownWriter getWriter() {
-            return writer;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void render(Node node) {
-            nodeRendererMap.render(node);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Set<Character> getSpecialCharacters() {
-            return additionalTextEscapes;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

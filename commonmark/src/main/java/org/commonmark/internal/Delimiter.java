@@ -2,7 +2,6 @@ package org.commonmark.internal;
 
 import org.commonmark.node.Text;
 import org.commonmark.parser.delimiter.DelimiterRun;
-
 import java.util.List;
 
 /**
@@ -11,7 +10,9 @@ import java.util.List;
 public class Delimiter implements DelimiterRun {
 
     public final List<Text> characters;
+
     public final char delimiterChar;
+
     private final int originalLength;
 
     // Can open emphasis, see spec.
@@ -21,6 +22,7 @@ public class Delimiter implements DelimiterRun {
     private final boolean canClose;
 
     public Delimiter previous;
+
     public Delimiter next;
 
     public Delimiter(List<Text> characters, char delimiterChar, boolean canOpen, boolean canClose, Delimiter previous) {
@@ -34,49 +36,41 @@ public class Delimiter implements DelimiterRun {
 
     @Override
     public boolean canOpen() {
-        return canOpen;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canClose() {
-        return canClose;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int length() {
-        return characters.size();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int originalLength() {
-        return originalLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Text getOpener() {
-        return characters.get(characters.size() - 1);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Text getCloser() {
-        return characters.get(0);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Iterable<Text> getOpeners(int length) {
-        if (!(length >= 1 && length <= length())) {
-            throw new IllegalArgumentException("length must be between 1 and " + length() + ", was " + length);
-        }
-
-        return characters.subList(characters.size() - length, characters.size());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Iterable<Text> getClosers(int length) {
-        if (!(length >= 1 && length <= length())) {
-            throw new IllegalArgumentException("length must be between 1 and " + length() + ", was " + length);
-        }
-
-        return characters.subList(0, length);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

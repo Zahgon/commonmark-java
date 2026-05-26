@@ -9,14 +9,15 @@ import org.commonmark.parser.SourceLine;
 import org.commonmark.parser.SourceLines;
 import org.commonmark.parser.block.*;
 import org.commonmark.text.Characters;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableBlockParser extends AbstractBlockParser {
 
     private final TableBlock block = new TableBlock();
+
     private final List<SourceLine> rowLines = new ArrayList<>();
+
     private final List<TableCellInfo> columns;
 
     private boolean canHaveLazyContinuationLines = true;
@@ -28,88 +29,27 @@ public class TableBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean canHaveLazyContinuationLines() {
-        return canHaveLazyContinuationLines;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Block getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        CharSequence content = state.getLine().getContent();
-        int pipe = Characters.find('|', content, state.getNextNonSpaceIndex());
-        if (pipe != -1) {
-            if (pipe == state.getNextNonSpaceIndex()) {
-                // If we *only* have a pipe character (and whitespace), that is not a valid table row and ends the table.
-                if (Characters.skipSpaceTab(content, pipe + 1, content.length()) == content.length()) {
-                    // We also don't want the pipe to be added via lazy continuation.
-                    canHaveLazyContinuationLines = false;
-                    return BlockContinue.none();
-                }
-            }
-            return BlockContinue.atIndex(state.getIndex());
-        } else {
-            return BlockContinue.none();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void addLine(SourceLine line) {
-        rowLines.add(line);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
-        List<SourceSpan> sourceSpans = block.getSourceSpans();
-
-        SourceSpan headerSourceSpan = !sourceSpans.isEmpty() ? sourceSpans.get(0) : null;
-        Node head = new TableHead();
-        if (headerSourceSpan != null) {
-            head.addSourceSpan(headerSourceSpan);
-        }
-        block.appendChild(head);
-
-        TableRow headerRow = new TableRow();
-        headerRow.setSourceSpans(head.getSourceSpans());
-        head.appendChild(headerRow);
-
-        List<SourceLine> headerCells = split(rowLines.get(0));
-        int headerColumns = headerCells.size();
-        for (int i = 0; i < headerColumns; i++) {
-            SourceLine cell = headerCells.get(i);
-            TableCell tableCell = parseCell(cell, i, inlineParser);
-            tableCell.setHeader(true);
-            headerRow.appendChild(tableCell);
-        }
-
-        TableBody body = null;
-        // Body starts at index 2. 0 is header, 1 is separator.
-        for (int rowIndex = 2; rowIndex < rowLines.size(); rowIndex++) {
-            SourceLine rowLine = rowLines.get(rowIndex);
-            SourceSpan sourceSpan = rowIndex < sourceSpans.size() ? sourceSpans.get(rowIndex) : null;
-            List<SourceLine> cells = split(rowLine);
-            TableRow row = new TableRow();
-            if (sourceSpan != null) {
-                row.addSourceSpan(sourceSpan);
-            }
-
-            // Body can not have more columns than head
-            for (int i = 0; i < headerColumns; i++) {
-                SourceLine cell = i < cells.size() ? cells.get(i) : SourceLine.of("", null);
-                TableCell tableCell = parseCell(cell, i, inlineParser);
-                row.appendChild(tableCell);
-            }
-
-            if (body == null) {
-                // It's valid to have a table without body. In that case, don't add an empty TableBody node.
-                body = new TableBody();
-                block.appendChild(body);
-            }
-            body.appendChild(row);
-            body.addSourceSpan(sourceSpan);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private TableCell parseCell(SourceLine cell, int column, InlineParser inlineParser) {
@@ -118,18 +58,15 @@ public class TableBlockParser extends AbstractBlockParser {
         if (sourceSpan != null) {
             tableCell.addSourceSpan(sourceSpan);
         }
-
         if (column < columns.size()) {
             TableCellInfo cellInfo = columns.get(column);
             tableCell.setAlignment(cellInfo.getAlignment());
             tableCell.setWidth(cellInfo.getWidth());
         }
-
         CharSequence content = cell.getContent();
         int start = Characters.skipSpaceTab(content, 0, content.length());
         int end = Characters.skipSpaceTabBackwards(content, content.length() - 1, start);
         inlineParser.parse(SourceLines.of(cell.substring(start, end + 1)), tableCell);
-
         return tableCell;
     }
 
@@ -149,7 +86,7 @@ public class TableBlockParser extends AbstractBlockParser {
         StringBuilder sb = new StringBuilder();
         for (int i = cellStart; i < cellEnd; i++) {
             char c = row.charAt(i);
-            switch (c) {
+            switch(c) {
                 case '\\':
                     if (i + 1 < cellEnd && row.charAt(i + 1) == '|') {
                         // Pipe is special for table parsing. An escaped pipe doesn't result in a new cell, but is
@@ -164,7 +101,6 @@ public class TableBlockParser extends AbstractBlockParser {
                     break;
                 case '|':
                     String content = sb.toString();
-
                     cells.add(SourceLine.of(content, line.substring(cellStart, i).getSourceSpan()));
                     sb.setLength(0);
                     // + 1 to skip the pipe itself for the next cell's span
@@ -197,7 +133,7 @@ public class TableBlockParser extends AbstractBlockParser {
         int width = 0;
         while (i < s.length()) {
             char c = s.charAt(i);
-            switch (c) {
+            switch(c) {
                 case '|':
                     i++;
                     pipes++;
@@ -273,35 +209,22 @@ public class TableBlockParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            List<SourceLine> paragraphLines = matchedBlockParser.getParagraphLines().getLines();
-            if (!paragraphLines.isEmpty() && Characters.find('|', paragraphLines.get(paragraphLines.size() - 1).getContent(), 0) != -1) {
-                SourceLine line = state.getLine();
-                SourceLine separatorLine = line.substring(state.getIndex(), line.getContent().length());
-                List<TableCellInfo> columns = parseSeparator(separatorLine.getContent());
-                if (columns != null && !columns.isEmpty()) {
-                    SourceLine paragraph = paragraphLines.get(paragraphLines.size() - 1);
-                    List<SourceLine> headerCells = split(paragraph);
-                    if (columns.size() >= headerCells.size()) {
-                        return BlockStart.of(new TableBlockParser(columns, paragraph))
-                                .atIndex(state.getIndex())
-                                .replaceParagraphLines(1);
-                    }
-                }
-            }
-            return BlockStart.none();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static class TableCellInfo {
+
         private final TableCell.Alignment alignment;
+
         private final int width;
 
         public TableCell.Alignment getAlignment() {
-            return alignment;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public int getWidth() {
-            return width;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public TableCellInfo(TableCell.Alignment alignment, int width) {

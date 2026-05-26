@@ -4,7 +4,6 @@ import org.commonmark.Extension;
 import org.commonmark.internal.renderer.NodeRendererMap;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.Renderer;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,6 @@ public class TextContentRenderer implements Renderer {
 
     private TextContentRenderer(Builder builder) {
         this.lineBreakRendering = builder.lineBreakRendering;
-
         this.nodeRendererFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
         this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
         // Add as last. This means clients can override the rendering of core nodes if they want.
@@ -32,20 +30,17 @@ public class TextContentRenderer implements Renderer {
      * @return a builder
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void render(Node node, Appendable output) {
-        RendererContext context = new RendererContext(new TextContentWriter(output, lineBreakRendering));
-        context.render(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String render(Node node) {
-        StringBuilder sb = new StringBuilder();
-        render(node, sb);
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -54,13 +49,14 @@ public class TextContentRenderer implements Renderer {
     public static class Builder {
 
         private List<TextContentNodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+
         private LineBreakRendering lineBreakRendering = LineBreakRendering.COMPACT;
 
         /**
          * @return the configured {@link TextContentRenderer}
          */
         public TextContentRenderer build() {
-            return new TextContentRenderer(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -71,8 +67,7 @@ public class TextContentRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder lineBreakRendering(LineBreakRendering lineBreakRendering) {
-            this.lineBreakRendering = lineBreakRendering;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -100,8 +95,7 @@ public class TextContentRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder nodeRendererFactory(TextContentNodeRendererFactory nodeRendererFactory) {
-            this.nodeRendererFactories.add(nodeRendererFactory);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -109,14 +103,7 @@ public class TextContentRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
-            for (Extension extension : extensions) {
-                if (extension instanceof TextContentRenderer.TextContentRendererExtension) {
-                    TextContentRenderer.TextContentRendererExtension textContentRendererExtension =
-                            (TextContentRenderer.TextContentRendererExtension) extension;
-                    textContentRendererExtension.extend(this);
-                }
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -124,16 +111,18 @@ public class TextContentRenderer implements Renderer {
      * Extension for {@link TextContentRenderer}.
      */
     public interface TextContentRendererExtension extends Extension {
+
         void extend(TextContentRenderer.Builder rendererBuilder);
     }
 
     private class RendererContext implements TextContentNodeRendererContext {
+
         private final TextContentWriter textContentWriter;
+
         private final NodeRendererMap nodeRendererMap = new NodeRendererMap();
 
         private RendererContext(TextContentWriter textContentWriter) {
             this.textContentWriter = textContentWriter;
-
             for (var factory : nodeRendererFactories) {
                 var renderer = factory.create(this);
                 nodeRendererMap.add(renderer);
@@ -142,22 +131,22 @@ public class TextContentRenderer implements Renderer {
 
         @Override
         public LineBreakRendering lineBreakRendering() {
-            return lineBreakRendering;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean stripNewlines() {
-            return lineBreakRendering == LineBreakRendering.STRIP;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public TextContentWriter getWriter() {
-            return textContentWriter;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void render(Node node) {
-            nodeRendererMap.render(node);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

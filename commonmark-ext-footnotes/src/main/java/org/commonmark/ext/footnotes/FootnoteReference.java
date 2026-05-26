@@ -9,6 +9,7 @@ import org.commonmark.node.CustomNode;
  * match the label of a corresponding {@link FootnoteDefinition} for the footnote to be parsed.
  */
 public class FootnoteReference extends CustomNode {
+
     private String label;
 
     public FootnoteReference(String label) {
@@ -16,6 +17,6 @@ public class FootnoteReference extends CustomNode {
     }
 
     public String getLabel() {
-        return label;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -6,12 +6,15 @@ import java.util.LinkedList;
 public class TextContentWriter {
 
     private final Appendable buffer;
+
     private final LineBreakRendering lineBreakRendering;
 
     private final LinkedList<String> prefixes = new LinkedList<>();
+
     private final LinkedList<Boolean> tight = new LinkedList<>();
 
     private String blockSeparator = null;
+
     private char lastChar;
 
     public TextContentWriter(Appendable out) {
@@ -24,43 +27,35 @@ public class TextContentWriter {
     }
 
     public void whitespace() {
-        if (lastChar != 0 && lastChar != ' ') {
-            write(' ');
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void colon() {
-        if (lastChar != 0 && lastChar != ':') {
-            write(':');
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void line() {
-        append('\n');
-        writePrefixes();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void block() {
-        blockSeparator = lineBreakRendering == LineBreakRendering.STRIP ? " " : //
-                lineBreakRendering == LineBreakRendering.COMPACT || isTight() ? "\n" : "\n\n";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void resetBlock() {
-        blockSeparator = null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void writeStripped(String s) {
-        write(s.replaceAll("[\\r\\n\\s]+", " "));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void write(String s) {
-        flushBlockSeparator();
-        append(s);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void write(char c) {
-        flushBlockSeparator();
-        append(c);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,7 +65,7 @@ public class TextContentWriter {
      * @param prefix the raw prefix string
      */
     public void pushPrefix(String prefix) {
-        prefixes.addLast(prefix);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,14 +74,14 @@ public class TextContentWriter {
      * @param prefix the raw prefix string to write
      */
     public void writePrefix(String prefix) {
-        write(prefix);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Remove the last prefix from the top of the stack.
      */
     public void popPrefix() {
-        prefixes.removeLast();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -98,14 +93,14 @@ public class TextContentWriter {
      * only future ones.
      */
     public void pushTight(boolean tight) {
-        this.tight.addLast(tight);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Remove the last "tight" setting from the top of the stack.
      */
     public void popTight() {
-        this.tight.removeLast();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private boolean isTight() {
@@ -142,7 +137,6 @@ public class TextContentWriter {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         int length = s.length();
         if (length != 0) {
             lastChar = s.charAt(length - 1);
@@ -155,7 +149,6 @@ public class TextContentWriter {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         lastChar = c;
     }
 }

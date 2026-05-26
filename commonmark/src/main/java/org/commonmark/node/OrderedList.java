@@ -15,33 +15,34 @@ package org.commonmark.node;
 public class OrderedList extends ListBlock {
 
     private String markerDelimiter;
+
     private Integer markerStartNumber;
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the start number used in the marker, e.g. {@code 1}, if available, or null otherwise
      */
     public Integer getMarkerStartNumber() {
-        return markerStartNumber;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setMarkerStartNumber(Integer markerStartNumber) {
-        this.markerStartNumber = markerStartNumber;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the delimiter used in the marker, e.g. {@code .} or {@code )}, if available, or null otherwise
      */
     public String getMarkerDelimiter() {
-        return markerDelimiter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setMarkerDelimiter(String markerDelimiter) {
-        this.markerDelimiter = markerDelimiter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

@@ -8,7 +8,6 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererContext;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererFactory;
 import org.commonmark.renderer.markdown.MarkdownRenderer;
-
 import java.util.Set;
 
 /**
@@ -32,9 +31,7 @@ import java.util.Set;
  *
  * @see <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#footnotes">GitHub docs for footnotes</a>
  */
-public class FootnotesExtension implements Parser.ParserExtension,
-        HtmlRenderer.HtmlRendererExtension,
-        MarkdownRenderer.MarkdownRendererExtension {
+public class FootnotesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, MarkdownRenderer.MarkdownRendererExtension {
 
     private final boolean inlineFootnotes;
 
@@ -46,41 +43,26 @@ public class FootnotesExtension implements Parser.ParserExtension,
      * The extension with the default configuration (no support for inline footnotes).
      */
     public static Extension create() {
-        return builder().build();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder
-                .customBlockParserFactory(new FootnoteBlockParser.Factory())
-                .linkProcessor(new FootnoteLinkProcessor());
-        if (inlineFootnotes) {
-            parserBuilder.linkMarker('^');
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(FootnoteHtmlNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(MarkdownRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new MarkdownNodeRendererFactory() {
-            @Override
-            public NodeRenderer create(MarkdownNodeRendererContext context) {
-                return new FootnoteMarkdownNodeRenderer(context);
-            }
-
-            @Override
-            public Set<Character> getSpecialCharacters() {
-                return Set.of();
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Builder {
@@ -94,12 +76,11 @@ public class FootnotesExtension implements Parser.ParserExtension,
          * </pre>
          */
         public Builder inlineFootnotes(boolean inlineFootnotes) {
-            this.inlineFootnotes = inlineFootnotes;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public FootnotesExtension build() {
-            return new FootnotesExtension(inlineFootnotes);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

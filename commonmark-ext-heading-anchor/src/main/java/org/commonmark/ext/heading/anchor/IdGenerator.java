@@ -11,10 +11,15 @@ import java.util.regex.Pattern;
  * Use {@link #builder()} to create an instance.
  */
 public class IdGenerator {
+
     private final Pattern allowedCharacters;
+
     private final Map<String, Integer> identityMap;
+
     private final String prefix;
+
     private final String suffix;
+
     private String defaultIdentifier;
 
     private IdGenerator(Builder builder) {
@@ -29,7 +34,7 @@ public class IdGenerator {
      * @return a new builder with default arguments
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -64,20 +69,7 @@ public class IdGenerator {
      * identifier given in the constructor will be used.
      */
     public String generateId(String text) {
-        String normalizedIdentity = text != null ? normalizeText(text) : defaultIdentifier;
-
-        if (normalizedIdentity.isEmpty()) {
-            normalizedIdentity = defaultIdentifier;
-        }
-
-        if (!identityMap.containsKey(normalizedIdentity)) {
-            identityMap.put(normalizedIdentity, 1);
-            return prefix + normalizedIdentity + suffix;
-        } else {
-            int currentCount = identityMap.get(normalizedIdentity);
-            identityMap.put(normalizedIdentity, currentCount + 1);
-            return prefix + normalizedIdentity + "-" + currentCount + suffix;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static Pattern compileAllowedCharactersPattern() {
@@ -98,24 +90,24 @@ public class IdGenerator {
      */
     private String normalizeText(String text) {
         String firstPassNormalising = text.toLowerCase().replace(" ", "-");
-
         StringBuilder sb = new StringBuilder();
         Matcher matcher = allowedCharacters.matcher(firstPassNormalising);
-
         while (matcher.find()) {
             sb.append(matcher.group());
         }
-
         return sb.toString();
     }
 
     public static class Builder {
+
         private String defaultIdentifier = "id";
+
         private String prefix = "";
+
         private String suffix = "";
 
         public IdGenerator build() {
-            return new IdGenerator(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -123,8 +115,7 @@ public class IdGenerator {
          * @return {@code this}
          */
         public Builder defaultId(String defaultId) {
-            this.defaultIdentifier = defaultId;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -132,8 +123,7 @@ public class IdGenerator {
          * @return {@code this}
          */
         public Builder prefix(String prefix) {
-            this.prefix = prefix;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -141,8 +131,7 @@ public class IdGenerator {
          * @return {@code this}
          */
         public Builder suffix(String suffix) {
-            this.suffix = suffix;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

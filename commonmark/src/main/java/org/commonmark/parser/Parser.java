@@ -12,11 +12,9 @@ import org.commonmark.parser.beta.InlineContentParserFactory;
 import org.commonmark.parser.beta.LinkResult;
 import org.commonmark.parser.block.BlockParserFactory;
 import org.commonmark.parser.delimiter.DelimiterProcessor;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
-
 
 /**
  * Parses input text to a tree of nodes.
@@ -30,13 +28,21 @@ import java.util.*;
 public class Parser {
 
     private final List<BlockParserFactory> blockParserFactories;
+
     private final List<InlineContentParserFactory> inlineContentParserFactories;
+
     private final List<DelimiterProcessor> delimiterProcessors;
+
     private final List<LinkProcessor> linkProcessors;
+
     private final Set<Character> linkMarkers;
+
     private final InlineParserFactory inlineParserFactory;
+
     private final List<PostProcessor> postProcessors;
+
     private final IncludeSourceSpans includeSourceSpans;
+
     private final int maxOpenBlockParsers;
 
     private Parser(Builder builder) {
@@ -49,11 +55,9 @@ public class Parser {
         this.linkMarkers = builder.linkMarkers;
         this.includeSourceSpans = builder.includeSourceSpans;
         this.maxOpenBlockParsers = builder.maxOpenBlockParsers;
-
         // Try to construct an inline parser. Invalid configuration might result in an exception, which we want to
         // detect as soon as possible.
-        var context = new InlineParserContextImpl(
-                inlineContentParserFactories, delimiterProcessors, linkProcessors, linkMarkers, new Definitions());
+        var context = new InlineParserContextImpl(inlineContentParserFactories, delimiterProcessors, linkProcessors, linkMarkers, new Definitions());
         this.inlineParserFactory.create(context);
     }
 
@@ -63,7 +67,7 @@ public class Parser {
      * @return a builder
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -75,10 +79,7 @@ public class Parser {
      * @return the root node
      */
     public Node parse(String input) {
-        Objects.requireNonNull(input, "input must not be null");
-        DocumentParser documentParser = createDocumentParser();
-        Node document = documentParser.parse(input);
-        return postProcess(document);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,15 +101,11 @@ public class Parser {
      * @throws IOException when reading throws an exception
      */
     public Node parseReader(Reader input) throws IOException {
-        Objects.requireNonNull(input, "input must not be null");
-        DocumentParser documentParser = createDocumentParser();
-        Node document = documentParser.parse(input);
-        return postProcess(document);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private DocumentParser createDocumentParser() {
-        return new DocumentParser(blockParserFactories, inlineParserFactory, inlineContentParserFactories,
-                delimiterProcessors, linkProcessors, linkMarkers, includeSourceSpans, maxOpenBlockParsers);
+        return new DocumentParser(blockParserFactories, inlineParserFactory, inlineContentParserFactories, delimiterProcessors, linkProcessors, linkMarkers, includeSourceSpans, maxOpenBlockParsers);
     }
 
     private Node postProcess(Node document) {
@@ -122,22 +119,32 @@ public class Parser {
      * Builder for configuring a {@link Parser}.
      */
     public static class Builder {
+
         private final List<BlockParserFactory> blockParserFactories = new ArrayList<>();
+
         private final List<InlineContentParserFactory> inlineContentParserFactories = new ArrayList<>();
+
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
+
         private final List<LinkProcessor> linkProcessors = new ArrayList<>();
+
         private final List<PostProcessor> postProcessors = new ArrayList<>();
+
         private final Set<Character> linkMarkers = new HashSet<>();
+
         private Set<Class<? extends Block>> enabledBlockTypes = DocumentParser.getDefaultBlockParserTypes();
+
         private InlineParserFactory inlineParserFactory;
+
         private IncludeSourceSpans includeSourceSpans = IncludeSourceSpans.NONE;
+
         private int maxOpenBlockParsers = Integer.MAX_VALUE;
 
         /**
          * @return the configured {@link Parser}
          */
         public Parser build() {
-            return new Parser(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -145,14 +152,7 @@ public class Parser {
          * @return {@code this}
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
-            Objects.requireNonNull(extensions, "extensions must not be null");
-            for (Extension extension : extensions) {
-                if (extension instanceof ParserExtension) {
-                    ParserExtension parserExtension = (ParserExtension) extension;
-                    parserExtension.extend(this);
-                }
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -183,10 +183,7 @@ public class Parser {
          * @return {@code this}
          */
         public Builder enabledBlockTypes(Set<Class<? extends Block>> enabledBlockTypes) {
-            Objects.requireNonNull(enabledBlockTypes, "enabledBlockTypes must not be null");
-            DocumentParser.checkEnabledBlockTypes(enabledBlockTypes);
-            this.enabledBlockTypes = enabledBlockTypes;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -199,8 +196,7 @@ public class Parser {
          * @since 0.16.0
          */
         public Builder includeSourceSpans(IncludeSourceSpans includeSourceSpans) {
-            this.includeSourceSpans = includeSourceSpans;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -217,11 +213,7 @@ public class Parser {
          * @return {@code this}
          */
         public Builder maxOpenBlockParsers(int maxOpenBlockParsers) {
-            if (maxOpenBlockParsers < 0) {
-                throw new IllegalArgumentException("maxOpenBlockParsers must be >= 0");
-            }
-            this.maxOpenBlockParsers = maxOpenBlockParsers;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -235,9 +227,7 @@ public class Parser {
          * @return {@code this}
          */
         public Builder customBlockParserFactory(BlockParserFactory blockParserFactory) {
-            Objects.requireNonNull(blockParserFactory, "blockParserFactory must not be null");
-            blockParserFactories.add(blockParserFactory);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -249,9 +239,7 @@ public class Parser {
          * in order in which they are registered, and then the built-in ones.
          */
         public Builder customInlineContentParserFactory(InlineContentParserFactory inlineContentParserFactory) {
-            Objects.requireNonNull(inlineContentParserFactory, "inlineContentParser must not be null");
-            inlineContentParserFactories.add(inlineContentParserFactory);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -268,9 +256,7 @@ public class Parser {
          * @return {@code this}
          */
         public Builder customDelimiterProcessor(DelimiterProcessor delimiterProcessor) {
-            Objects.requireNonNull(delimiterProcessor, "delimiterProcessor must not be null");
-            delimiterProcessors.add(delimiterProcessor);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -283,9 +269,7 @@ public class Parser {
          * @return {@code this}
          */
         public Builder linkProcessor(LinkProcessor linkProcessor) {
-            Objects.requireNonNull(linkProcessor, "linkProcessor must not be null");
-            linkProcessors.add(linkProcessor);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -300,15 +284,11 @@ public class Parser {
          * @return {@code this}
          */
         public Builder linkMarker(Character linkMarker) {
-            Objects.requireNonNull(linkMarker, "linkMarker must not be null");
-            linkMarkers.add(linkMarker);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder postProcessor(PostProcessor postProcessor) {
-            Objects.requireNonNull(postProcessor, "postProcessor must not be null");
-            postProcessors.add(postProcessor);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -330,8 +310,7 @@ public class Parser {
          * @return {@code this}
          */
         public Builder inlineParserFactory(InlineParserFactory inlineParserFactory) {
-            this.inlineParserFactory = inlineParserFactory;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         private InlineParserFactory getInlineParserFactory() {
@@ -347,6 +326,7 @@ public class Parser {
      * Extension for {@link Parser}.
      */
     public interface ParserExtension extends Extension {
+
         void extend(Builder parserBuilder);
     }
 }

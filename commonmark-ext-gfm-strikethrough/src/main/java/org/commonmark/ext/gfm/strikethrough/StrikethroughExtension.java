@@ -12,7 +12,6 @@ import org.commonmark.renderer.markdown.MarkdownNodeRendererContext;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererFactory;
 import org.commonmark.renderer.markdown.MarkdownRenderer;
 import org.commonmark.renderer.text.TextContentRenderer;
-
 import java.util.Set;
 
 /**
@@ -43,8 +42,7 @@ import java.util.Set;
  * {@link IllegalArgumentException} when constructing the parser.
  * </p>
  */
-public class StrikethroughExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension,
-        TextContentRenderer.TextContentRendererExtension, MarkdownRenderer.MarkdownRendererExtension {
+public class StrikethroughExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, TextContentRenderer.TextContentRendererExtension, MarkdownRenderer.MarkdownRendererExtension {
 
     private final boolean requireTwoTildes;
 
@@ -56,44 +54,34 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
      * @return the extension with default options
      */
     public static Extension create() {
-        return builder().build();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return a builder to configure the behavior of the extension
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customDelimiterProcessor(new StrikethroughDelimiterProcessor(requireTwoTildes));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(StrikethroughHtmlNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(TextContentRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(StrikethroughTextContentNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(MarkdownRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new MarkdownNodeRendererFactory() {
-            @Override
-            public NodeRenderer create(MarkdownNodeRendererContext context) {
-                return new StrikethroughMarkdownNodeRenderer(context);
-            }
-
-            @Override
-            public Set<Character> getSpecialCharacters() {
-                return Set.of('~');
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Builder {
@@ -106,15 +94,14 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
          * @return {@code this}
          */
         public Builder requireTwoTildes(boolean requireTwoTildes) {
-            this.requireTwoTildes = requireTwoTildes;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * @return a configured extension
          */
         public Extension build() {
-            return new StrikethroughExtension(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

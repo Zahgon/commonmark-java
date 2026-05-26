@@ -3,12 +3,12 @@ package org.commonmark.ext.ins.internal;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.html.HtmlNodeRendererContext;
 import org.commonmark.renderer.html.HtmlWriter;
-
 import java.util.Map;
 
 public class InsHtmlNodeRenderer extends InsNodeRenderer {
 
     private final HtmlNodeRendererContext context;
+
     private final HtmlWriter html;
 
     public InsHtmlNodeRenderer(HtmlNodeRendererContext context) {
@@ -18,10 +18,7 @@ public class InsHtmlNodeRenderer extends InsNodeRenderer {
 
     @Override
     public void render(Node node) {
-        Map<String, String> attributes = context.extendAttributes(node, "ins", Map.of());
-        html.tag("ins", attributes);
-        renderChildren(node);
-        html.tag("/ins");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

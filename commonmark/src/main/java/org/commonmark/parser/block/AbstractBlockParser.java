@@ -5,46 +5,47 @@ import org.commonmark.node.DefinitionMap;
 import org.commonmark.node.SourceSpan;
 import org.commonmark.parser.InlineParser;
 import org.commonmark.parser.SourceLine;
-
 import java.util.List;
 
 public abstract class AbstractBlockParser implements BlockParser {
 
     @Override
     public boolean isContainer() {
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canHaveLazyContinuationLines() {
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canContain(Block childBlock) {
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void addLine(SourceLine line) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void addSourceSpan(SourceSpan sourceSpan) {
-        getBlock().addSourceSpan(sourceSpan);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public List<DefinitionMap<?>> getDefinitions() {
-        return List.of();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void closeBlock() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

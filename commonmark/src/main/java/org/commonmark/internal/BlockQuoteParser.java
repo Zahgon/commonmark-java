@@ -12,32 +12,22 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
     @Override
     public boolean isContainer() {
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canContain(Block block) {
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockQuote getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        int nextNonSpace = state.getNextNonSpaceIndex();
-        if (isMarker(state, nextNonSpace)) {
-            int newColumn = state.getColumn() + state.getIndent() + 1;
-            // optional following space or tab
-            if (Characters.isSpaceOrTab(state.getLine().getContent(), nextNonSpace + 1)) {
-                newColumn++;
-            }
-            return BlockContinue.atColumn(newColumn);
-        } else {
-            return BlockContinue.none();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static boolean isMarker(ParserState state, int index) {
@@ -46,19 +36,10 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
 
     public static class Factory extends AbstractBlockParserFactory {
+
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            int nextNonSpace = state.getNextNonSpaceIndex();
-            if (isMarker(state, nextNonSpace)) {
-                int newColumn = state.getColumn() + state.getIndent() + 1;
-                // optional following space or tab
-                if (Characters.isSpaceOrTab(state.getLine().getContent(), nextNonSpace + 1)) {
-                    newColumn++;
-                }
-                return BlockStart.of(new BlockQuoteParser()).atColumn(newColumn);
-            } else {
-                return BlockStart.none();
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

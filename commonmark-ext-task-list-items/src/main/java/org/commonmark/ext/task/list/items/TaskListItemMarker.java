@@ -14,6 +14,6 @@ public class TaskListItemMarker extends CustomNode {
     }
 
     public boolean isChecked() {
-        return checked;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

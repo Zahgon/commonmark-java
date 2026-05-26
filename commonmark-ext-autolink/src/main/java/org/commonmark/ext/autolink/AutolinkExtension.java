@@ -2,7 +2,6 @@ package org.commonmark.ext.autolink;
 
 import java.util.EnumSet;
 import java.util.Set;
-
 import org.commonmark.Extension;
 import org.commonmark.ext.autolink.internal.AutolinkPostProcessor;
 import org.commonmark.parser.Parser;
@@ -31,19 +30,19 @@ public class AutolinkExtension implements Parser.ParserExtension {
      * @return the extension with default options
      */
     public static Extension create() {
-        return builder().build();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return a builder to configure the behavior of the extension.
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.postProcessor(new AutolinkPostProcessor(linkTypes));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Builder {
@@ -56,11 +55,7 @@ public class AutolinkExtension implements Parser.ParserExtension {
          * @return {@code this}
          */
         public Builder linkTypes(AutolinkType... linkTypes) {
-            if (linkTypes == null) {
-                throw new NullPointerException("linkTypes must not be null");
-            }
-
-            return this.linkTypes(Set.of(linkTypes));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -69,23 +64,14 @@ public class AutolinkExtension implements Parser.ParserExtension {
          * @return {@code this}
          */
         public Builder linkTypes(Set<AutolinkType> linkTypes) {
-            if (linkTypes == null) {
-                throw new NullPointerException("linkTypes must not be null");
-            }
-
-            if (linkTypes.isEmpty()) {
-                throw new IllegalArgumentException("linkTypes must not be empty");
-            }
-
-            this.linkTypes = EnumSet.copyOf(linkTypes);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * @return a configured extension
          */
         public Extension build() {
-            return new AutolinkExtension(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

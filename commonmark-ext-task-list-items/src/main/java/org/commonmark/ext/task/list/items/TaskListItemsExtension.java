@@ -22,16 +22,16 @@ public class TaskListItemsExtension implements Parser.ParserExtension, HtmlRende
     }
 
     public static Extension create() {
-        return new TaskListItemsExtension();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.postProcessor(new TaskListItemPostProcessor());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(TaskListItemHtmlNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

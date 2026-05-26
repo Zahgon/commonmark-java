@@ -3,12 +3,12 @@ package org.commonmark.renderer.html;
 import java.util.*;
 
 /**
- *
  * Allows http, https, mailto, and data protocols for url.
  * Also allows protocol relative urls, and relative urls.
  * Implementation based on https://github.com/OWASP/java-html-sanitizer/blob/f07e44b034a45d94d6fd010279073c38b6933072/src/main/java/org/owasp/html/FilterUrlByProtocolAttributePolicy.java
  */
 public class DefaultUrlSanitizer implements UrlSanitizer {
+
     private Set<String> protocols;
 
     public DefaultUrlSanitizer() {
@@ -21,29 +21,12 @@ public class DefaultUrlSanitizer implements UrlSanitizer {
 
     @Override
     public String sanitizeLinkUrl(String url) {
-        url = stripHtmlSpaces(url);
-        protocol_loop:
-        for (int i = 0, n = url.length(); i < n; ++i) {
-            switch (url.charAt(i)) {
-                case '/':
-                case '#':
-                case '?':  // No protocol.
-                    break protocol_loop;
-                case ':':
-                    String protocol = url.substring(0, i).toLowerCase();
-                    if (!protocols.contains(protocol)) {
-                        return "";
-                    }
-                    break protocol_loop;
-            }
-        }
-        return url;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     @Override
     public String sanitizeImageUrl(String url) {
-        return sanitizeLinkUrl(url);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String stripHtmlSpaces(String s) {
@@ -65,7 +48,7 @@ public class DefaultUrlSanitizer implements UrlSanitizer {
     }
 
     private boolean isHtmlSpace(int ch) {
-        switch (ch) {
+        switch(ch) {
             case ' ':
             case '\t':
             case '\n':
@@ -74,7 +57,6 @@ public class DefaultUrlSanitizer implements UrlSanitizer {
                 return true;
             default:
                 return false;
-
         }
     }
 }

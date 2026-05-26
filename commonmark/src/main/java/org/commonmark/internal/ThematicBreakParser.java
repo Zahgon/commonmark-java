@@ -14,30 +14,19 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
     @Override
     public Block getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        // a horizontal rule can never container > 1 line, so fail to match
-        return BlockContinue.none();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Factory extends AbstractBlockParserFactory {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= 4) {
-                return BlockStart.none();
-            }
-            int nextNonSpace = state.getNextNonSpaceIndex();
-            CharSequence line = state.getLine().getContent();
-            if (isThematicBreak(line, nextNonSpace)) {
-                var literal = String.valueOf(line.subSequence(state.getIndex(), line.length()));
-                return BlockStart.of(new ThematicBreakParser(literal)).atIndex(line.length());
-            } else {
-                return BlockStart.none();
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -49,7 +38,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
         int asterisks = 0;
         int length = line.length();
         for (int i = index; i < length; i++) {
-            switch (line.charAt(i)) {
+            switch(line.charAt(i)) {
                 case '-':
                     dashes++;
                     break;
@@ -67,9 +56,6 @@ public class ThematicBreakParser extends AbstractBlockParser {
                     return false;
             }
         }
-
-        return ((dashes >= 3 && underscores == 0 && asterisks == 0) ||
-                (underscores >= 3 && dashes == 0 && asterisks == 0) ||
-                (asterisks >= 3 && dashes == 0 && underscores == 0));
+        return ((dashes >= 3 && underscores == 0 && asterisks == 0) || (underscores >= 3 && dashes == 0 && asterisks == 0) || (asterisks >= 3 && dashes == 0 && underscores == 0));
     }
 }

@@ -3,7 +3,6 @@ package org.commonmark.internal;
 import org.commonmark.internal.util.Parsing;
 import org.commonmark.node.*;
 import org.commonmark.parser.block.*;
-
 import java.util.Objects;
 
 public class ListBlockParser extends AbstractBlockParser {
@@ -11,6 +10,7 @@ public class ListBlockParser extends AbstractBlockParser {
     private final ListBlock block;
 
     private boolean hadBlankLine;
+
     private int linesAfterBlank;
 
     public ListBlockParser(ListBlock block) {
@@ -19,62 +19,39 @@ public class ListBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean isContainer() {
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canContain(Block childBlock) {
-        if (childBlock instanceof ListItem) {
-            // Another list item is added to this list block. If the previous line was blank, that means this list block
-            // is "loose" (not tight).
-            //
-            // spec: A list is loose if any of its constituent list items are separated by blank lines
-            if (hadBlankLine && linesAfterBlank == 1) {
-                block.setTight(false);
-                hadBlankLine = false;
-            }
-            return true;
-        } else {
-            return false;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Block getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        if (state.isBlank()) {
-            hadBlankLine = true;
-            linesAfterBlank = 0;
-        } else if (hadBlankLine) {
-            linesAfterBlank++;
-        }
-        // List blocks themselves don't have any markers, only list items. So try to stay in the list.
-        // If there is a block start other than list item, canContain makes sure that this list is closed.
-        return BlockContinue.atIndex(state.getIndex());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Parse a list marker and return data on the marker or null.
      */
-    private static ListData parseList(CharSequence line, final int markerIndex, final int markerColumn,
-                                      final boolean inParagraph) {
+    private static ListData parseList(CharSequence line, final int markerIndex, final int markerColumn, final boolean inParagraph) {
         ListMarkerData listMarker = parseListMarker(line, markerIndex);
         if (listMarker == null) {
             return null;
         }
         ListBlock listBlock = listMarker.listBlock;
-
         int indexAfterMarker = listMarker.indexAfterMarker;
         int markerLength = indexAfterMarker - markerIndex;
         // marker doesn't include tabs, so counting them as columns directly is ok
         int columnAfterMarker = markerColumn + markerLength;
         // the column within the line where the content starts
         int contentColumn = columnAfterMarker;
-
         // See at which column the content starts if there is content
         boolean hasContent = false;
         int length = line.length();
@@ -89,7 +66,6 @@ public class ListBlockParser extends AbstractBlockParser {
                 break;
             }
         }
-
         if (inParagraph) {
             // If the list item is ordered, the start number must be 1 to interrupt a paragraph.
             if (listBlock instanceof OrderedList && ((OrderedList) listBlock).getMarkerStartNumber() != 1) {
@@ -100,18 +76,16 @@ public class ListBlockParser extends AbstractBlockParser {
                 return null;
             }
         }
-
         if (!hasContent || (contentColumn - columnAfterMarker) > Parsing.CODE_BLOCK_INDENT) {
             // If this line is blank or has a code block, default to 1 space after marker
             contentColumn = columnAfterMarker + 1;
         }
-
         return new ListData(listBlock, contentColumn);
     }
 
     private static ListMarkerData parseListMarker(CharSequence line, int index) {
         char c = line.charAt(index);
-        switch (c) {
+        switch(c) {
             // spec: A bullet list marker is a -, +, or * character.
             case '-':
             case '+':
@@ -135,7 +109,7 @@ public class ListBlockParser extends AbstractBlockParser {
         int length = line.length();
         for (int i = index; i < length; i++) {
             char c = line.charAt(i);
-            switch (c) {
+            switch(c) {
                 case '0':
                 case '1':
                 case '2':
@@ -171,7 +145,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
     private static boolean isSpaceTabOrEnd(CharSequence line, int index) {
         if (index < line.length()) {
-            switch (line.charAt(index)) {
+            switch(line.charAt(index)) {
                 case ' ':
                 case '\t':
                     return true;
@@ -201,39 +175,14 @@ public class ListBlockParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            BlockParser matched = matchedBlockParser.getMatchedBlockParser();
-
-            if (state.getIndent() >= Parsing.CODE_BLOCK_INDENT) {
-                return BlockStart.none();
-            }
-            int markerIndex = state.getNextNonSpaceIndex();
-            int markerColumn = state.getColumn() + state.getIndent();
-            boolean inParagraph = !matchedBlockParser.getParagraphLines().isEmpty();
-            ListData listData = parseList(state.getLine().getContent(), markerIndex, markerColumn, inParagraph);
-            if (listData == null) {
-                return BlockStart.none();
-            }
-
-            int newColumn = listData.contentColumn;
-            ListItemParser listItemParser = new ListItemParser(state.getIndent(), newColumn - state.getColumn());
-
-            // prepend the list block if needed
-            if (!(matched instanceof ListBlockParser) ||
-                    !(listsMatch((ListBlock) matched.getBlock(), listData.listBlock))) {
-
-                ListBlockParser listBlockParser = new ListBlockParser(listData.listBlock);
-                // We start out with assuming a list is tight. If we find a blank line, we set it to loose later.
-                listData.listBlock.setTight(true);
-
-                return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
-            } else {
-                return BlockStart.of(listItemParser).atColumn(newColumn);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static class ListData {
+
         final ListBlock listBlock;
+
         final int contentColumn;
 
         ListData(ListBlock listBlock, int contentColumn) {
@@ -243,7 +192,9 @@ public class ListBlockParser extends AbstractBlockParser {
     }
 
     private static class ListMarkerData {
+
         final ListBlock listBlock;
+
         final int indexAfterMarker;
 
         ListMarkerData(ListBlock listBlock, int indexAfterMarker) {

@@ -12,7 +12,6 @@ import org.commonmark.renderer.markdown.MarkdownNodeRendererContext;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererFactory;
 import org.commonmark.renderer.markdown.MarkdownRenderer;
 import org.commonmark.renderer.text.TextContentRenderer;
-
 import java.util.Set;
 
 /**
@@ -32,38 +31,26 @@ public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     }
 
     public static Extension create() {
-        return new InsExtension();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customDelimiterProcessor(new InsDelimiterProcessor());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(InsHtmlNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(TextContentRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(InsTextContentNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(MarkdownRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new MarkdownNodeRendererFactory() {
-            @Override
-            public NodeRenderer create(MarkdownNodeRendererContext context) {
-                return new InsMarkdownNodeRenderer(context);
-            }
-
-            @Override
-            public Set<Character> getSpecialCharacters() {
-                // We technically don't need to escape single occurrences of +, but that's all the extension API
-                // exposes currently.
-                return Set.of('+');
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

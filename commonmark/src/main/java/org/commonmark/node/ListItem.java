@@ -12,11 +12,12 @@ package org.commonmark.node;
 public class ListItem extends Block {
 
     private Integer markerIndent;
+
     private Integer contentIndent;
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -32,11 +33,11 @@ public class ListItem extends Block {
      * Marker indent: 2
      */
     public Integer getMarkerIndent() {
-        return markerIndent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setMarkerIndent(Integer markerIndent) {
-        this.markerIndent = markerIndent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -55,11 +56,11 @@ public class ListItem extends Block {
      * as part of the list item.
      */
     public Integer getContentIndent() {
-        return contentIndent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setContentIndent(Integer contentIndent) {
-        this.contentIndent = contentIndent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -73,6 +74,6 @@ public class ListItem extends Block {
     }
 
     public void appendChild(Block child) {
-        super.appendChild(child);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

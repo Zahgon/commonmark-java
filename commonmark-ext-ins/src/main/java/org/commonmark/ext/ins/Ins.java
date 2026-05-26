@@ -12,11 +12,11 @@ public class Ins extends CustomNode implements Delimited {
 
     @Override
     public String getOpeningDelimiter() {
-        return DELIMITER;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getClosingDelimiter() {
-        return DELIMITER;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

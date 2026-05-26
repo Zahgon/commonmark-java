@@ -15,6 +15,7 @@ import org.commonmark.renderer.text.TextContentWriter;
 public class TableTextContentNodeRenderer extends TableNodeRenderer {
 
     private final TextContentWriter textContentWriter;
+
     private final TextContentNodeRendererContext context;
 
     public TableTextContentNodeRenderer(TextContentNodeRendererContext context) {
@@ -24,37 +25,27 @@ public class TableTextContentNodeRenderer extends TableNodeRenderer {
 
     @Override
     protected void renderBlock(TableBlock tableBlock) {
-        // Render rows tight
-        textContentWriter.pushTight(true);
-        renderChildren(tableBlock);
-        textContentWriter.popTight();
-        textContentWriter.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderHead(TableHead tableHead) {
-        renderChildren(tableHead);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderBody(TableBody tableBody) {
-        renderChildren(tableBody);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderRow(TableRow tableRow) {
-        renderChildren(tableRow);
-        textContentWriter.block();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderCell(TableCell tableCell) {
-        renderChildren(tableCell);
-        // For the last cell in row, don't render the delimiter
-        if (tableCell.getNext() != null) {
-            textContentWriter.write('|');
-            textContentWriter.whitespace();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

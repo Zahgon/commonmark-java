@@ -7,14 +7,11 @@ public abstract class Block extends Node {
 
     @Override
     public Block getParent() {
-        return (Block) super.getParent();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void setParent(Node parent) {
-        if (!(parent instanceof Block)) {
-            throw new IllegalArgumentException("Parent of block must also be block (can not be inline)");
-        }
-        super.setParent(parent);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

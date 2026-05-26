@@ -13,19 +13,7 @@ public class CoreLinkProcessor implements LinkProcessor {
 
     @Override
     public LinkResult process(LinkInfo linkInfo, Scanner scanner, InlineParserContext context) {
-        if (linkInfo.destination() != null) {
-            // Inline link
-            return process(linkInfo, scanner, linkInfo.destination(), linkInfo.title());
-        }
-
-        var label = linkInfo.label();
-        var ref = label != null && !label.isEmpty() ? label : linkInfo.text();
-        var def = context.getDefinition(LinkReferenceDefinition.class, ref);
-        if (def != null) {
-            // Reference link
-            return process(linkInfo, scanner, def.getDestination(), def.getTitle());
-        }
-        return LinkResult.none();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static LinkResult process(LinkInfo linkInfo, Scanner scanner, String destination, String title) {

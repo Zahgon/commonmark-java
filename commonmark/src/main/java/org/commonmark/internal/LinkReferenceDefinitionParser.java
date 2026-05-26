@@ -8,7 +8,6 @@ import org.commonmark.parser.SourceLine;
 import org.commonmark.parser.SourceLines;
 import org.commonmark.parser.beta.Position;
 import org.commonmark.parser.beta.Scanner;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,107 +22,62 @@ public class LinkReferenceDefinitionParser {
     private State state = State.START_DEFINITION;
 
     private final List<SourceLine> paragraphLines = new ArrayList<>();
+
     private final List<LinkReferenceDefinition> definitions = new ArrayList<>();
+
     private final List<SourceSpan> sourceSpans = new ArrayList<>();
 
     private StringBuilder label;
+
     private String destination;
+
     private char titleDelimiter;
+
     private StringBuilder title;
+
     private boolean referenceValid = false;
 
     public void parse(SourceLine line) {
-        paragraphLines.add(line);
-        if (state == State.PARAGRAPH) {
-            // We're in a paragraph now. Link reference definitions can only appear at the beginning, so once
-            // we're in a paragraph, there's no going back.
-            return;
-        }
-
-        Scanner scanner = Scanner.of(SourceLines.of(line));
-        while (scanner.hasNext()) {
-            boolean success;
-            switch (state) {
-                case START_DEFINITION: {
-                    success = startDefinition(scanner);
-                    break;
-                }
-                case LABEL: {
-                    success = label(scanner);
-                    break;
-                }
-                case DESTINATION: {
-                    success = destination(scanner);
-                    break;
-                }
-                case START_TITLE: {
-                    success = startTitle(scanner);
-                    break;
-                }
-                case TITLE: {
-                    success = title(scanner);
-                    break;
-                }
-                default: {
-                    throw new IllegalStateException("Unknown parsing state: " + state);
-                }
-            }
-            // Parsing failed, which means we fall back to treating text as a paragraph.
-            if (!success) {
-                state = State.PARAGRAPH;
-                // If parsing of the title part failed, we still have a valid reference that we can add, and we need to
-                // do it before the source span for this line is added.
-                finishReference();
-                return;
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void addSourceSpan(SourceSpan sourceSpan) {
-        sourceSpans.add(sourceSpan);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the lines that are normal paragraph content, without newlines
      */
     SourceLines getParagraphLines() {
-        return SourceLines.of(paragraphLines);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     List<SourceSpan> getParagraphSourceSpans() {
-        return sourceSpans;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     List<LinkReferenceDefinition> getDefinitions() {
-        finishReference();
-        return definitions;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     State getState() {
-        return state;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     List<SourceSpan> removeLines(int lines) {
-        var removedSpans = Collections.unmodifiableList(new ArrayList<>(
-                sourceSpans.subList(Math.max(sourceSpans.size() - lines, 0), sourceSpans.size())));
-        removeLast(lines, paragraphLines);
-        removeLast(lines, sourceSpans);
-        return removedSpans;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private boolean startDefinition(Scanner scanner) {
         // Finish any outstanding references now. We don't do this earlier because we need addSourceSpan to have been
         // called before we do it.
         finishReference();
-
         scanner.whitespace();
         if (!scanner.next('[')) {
             return false;
         }
-
         state = State.LABEL;
         label = new StringBuilder();
-
         if (!scanner.hasNext()) {
             label.append('\n');
         }
@@ -135,9 +89,7 @@ public class LinkReferenceDefinitionParser {
         if (!LinkScanner.scanLinkLabelContent(scanner)) {
             return false;
         }
-
         label.append(scanner.getSource(start, scanner.position()).getContent());
-
         if (!scanner.hasNext()) {
             // label might continue on next line
             label.append('\n');
@@ -147,19 +99,15 @@ public class LinkReferenceDefinitionParser {
             if (!scanner.next(':')) {
                 return false;
             }
-
             // spec: A link label can have at most 999 characters inside the square brackets.
             if (label.length() > 999) {
                 return false;
             }
-
             String normalizedLabel = Escaping.normalizeLabelContent(label.toString());
             if (normalizedLabel.isEmpty()) {
                 return false;
             }
-
             state = State.DESTINATION;
-
             scanner.whitespace();
             return true;
         } else {
@@ -173,12 +121,8 @@ public class LinkReferenceDefinitionParser {
         if (!LinkScanner.scanLinkDestination(scanner)) {
             return false;
         }
-
         String rawDestination = scanner.getSource(start, scanner.position()).getContent();
-        destination = rawDestination.startsWith("<") ?
-                rawDestination.substring(1, rawDestination.length() - 1) :
-                rawDestination;
-
+        destination = rawDestination.startsWith("<") ? rawDestination.substring(1, rawDestination.length() - 1) : rawDestination;
         int whitespace = scanner.whitespace();
         if (!scanner.hasNext()) {
             // Destination was at end of line, so this is a valid reference for sure (and maybe a title).
@@ -189,7 +133,6 @@ public class LinkReferenceDefinitionParser {
             // spec: The title must be separated from the link destination by whitespace
             return false;
         }
-
         state = State.START_TITLE;
         return true;
     }
@@ -200,10 +143,9 @@ public class LinkReferenceDefinitionParser {
             state = State.START_DEFINITION;
             return true;
         }
-
         titleDelimiter = '\0';
         char c = scanner.peek();
-        switch (c) {
+        switch(c) {
             case '"':
             case '\'':
                 titleDelimiter = c;
@@ -212,7 +154,6 @@ public class LinkReferenceDefinitionParser {
                 titleDelimiter = ')';
                 break;
         }
-
         if (titleDelimiter != '\0') {
             state = State.TITLE;
             title = new StringBuilder();
@@ -234,15 +175,12 @@ public class LinkReferenceDefinitionParser {
             title = null;
             return false;
         }
-
         title.append(scanner.getSource(start, scanner.position()).getContent());
-
         if (!scanner.hasNext()) {
             // Title ran until the end of line, so continue on next line (until we find the delimiter)
             title.append('\n');
             return true;
         }
-
         // Skip delimiter character
         scanner.next();
         scanner.whitespace();
@@ -254,7 +192,6 @@ public class LinkReferenceDefinitionParser {
         }
         referenceValid = true;
         paragraphLines.clear();
-
         // See if there's another definition.
         state = State.START_DEFINITION;
         return true;
@@ -264,14 +201,12 @@ public class LinkReferenceDefinitionParser {
         if (!referenceValid) {
             return;
         }
-
         String d = Escaping.unescapeString(destination);
         String t = title != null ? Escaping.unescapeString(title.toString()) : null;
         LinkReferenceDefinition definition = new LinkReferenceDefinition(label.toString(), d, t);
         definition.setSourceSpans(sourceSpans);
         sourceSpans.clear();
         definitions.add(definition);
-
         label = null;
         referenceValid = false;
         destination = null;
@@ -289,6 +224,7 @@ public class LinkReferenceDefinitionParser {
     }
 
     enum State {
+
         // Looking for the start of a definition, i.e. `[`
         START_DEFINITION,
         // Parsing the label, i.e. `foo` within `[foo]`
@@ -299,8 +235,7 @@ public class LinkReferenceDefinitionParser {
         START_TITLE,
         // Parsing the content of the title, i.e. `title` in `[foo]: /url "title"`
         TITLE,
-
         // End state, no matter what kind of lines we add, they won't be references
-        PARAGRAPH,
+        PARAGRAPH
     }
 }

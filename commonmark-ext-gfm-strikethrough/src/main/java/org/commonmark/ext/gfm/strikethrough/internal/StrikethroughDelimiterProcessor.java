@@ -22,46 +22,21 @@ public class StrikethroughDelimiterProcessor implements DelimiterProcessor {
 
     @Override
     public char getOpeningCharacter() {
-        return '~';
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public char getClosingCharacter() {
-        return '~';
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getMinLength() {
-        return requireTwoTildes ? 2 : 1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int process(DelimiterRun openingRun, DelimiterRun closingRun) {
-        if (openingRun.length() == closingRun.length() && openingRun.length() <= 2) {
-            // GitHub only accepts either one or two delimiters, but not a mix or more than that.
-
-            Text opener = openingRun.getOpener();
-
-            // Wrap nodes between delimiters in strikethrough.
-            String delimiter = openingRun.length() == 1 ? opener.getLiteral() : opener.getLiteral() + opener.getLiteral();
-            Node strikethrough = new Strikethrough(delimiter);
-
-            SourceSpans sourceSpans = new SourceSpans();
-            sourceSpans.addAllFrom(openingRun.getOpeners(openingRun.length()));
-
-            for (Node node : Nodes.between(opener, closingRun.getCloser())) {
-                strikethrough.appendChild(node);
-                sourceSpans.addAll(node.getSourceSpans());
-            }
-
-            sourceSpans.addAllFrom(closingRun.getClosers(closingRun.length()));
-            strikethrough.setSourceSpans(sourceSpans.getSourceSpans());
-
-            opener.insertAfter(strikethrough);
-
-            return openingRun.length();
-        } else {
-            return 0;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

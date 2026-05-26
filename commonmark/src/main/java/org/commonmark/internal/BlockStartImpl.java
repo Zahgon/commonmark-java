@@ -6,9 +6,13 @@ import org.commonmark.parser.block.BlockStart;
 public class BlockStartImpl extends BlockStart {
 
     private final BlockParser[] blockParsers;
+
     private int newIndex = -1;
+
     private int newColumn = -1;
+
     private boolean replaceActiveBlockParser = false;
+
     private int replaceParagraphLines = 0;
 
     public BlockStartImpl(BlockParser... blockParsers) {
@@ -16,49 +20,42 @@ public class BlockStartImpl extends BlockStart {
     }
 
     public BlockParser[] getBlockParsers() {
-        return blockParsers;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getNewIndex() {
-        return newIndex;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getNewColumn() {
-        return newColumn;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isReplaceActiveBlockParser() {
-        return replaceActiveBlockParser;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     int getReplaceParagraphLines() {
-        return replaceParagraphLines;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockStart atIndex(int newIndex) {
-        this.newIndex = newIndex;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockStart atColumn(int newColumn) {
-        this.newColumn = newColumn;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockStart replaceActiveBlockParser() {
-        this.replaceActiveBlockParser = true;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockStart replaceParagraphLines(int lines) {
-        if (!(lines >= 1)) {
-            throw new IllegalArgumentException("Lines must be >= 1");
-        }
-        this.replaceParagraphLines = lines;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

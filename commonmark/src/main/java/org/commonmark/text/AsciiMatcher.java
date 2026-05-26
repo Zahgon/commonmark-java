@@ -7,6 +7,7 @@ import java.util.Set;
  * Char matcher that can match ASCII characters efficiently.
  */
 public class AsciiMatcher implements CharMatcher {
+
     private final BitSet set;
 
     private AsciiMatcher(Builder builder) {
@@ -15,22 +16,23 @@ public class AsciiMatcher implements CharMatcher {
 
     @Override
     public boolean matches(char c) {
-        return set.get(c);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Builder newBuilder() {
-        return new Builder((BitSet) set.clone());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Builder builder() {
-        return new Builder(new BitSet());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Builder builder(AsciiMatcher matcher) {
-        return new Builder((BitSet) matcher.set.clone());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Builder {
+
         private final BitSet set;
 
         private Builder(BitSet set) {
@@ -38,36 +40,23 @@ public class AsciiMatcher implements CharMatcher {
         }
 
         public Builder c(char c) {
-            if (c > 127) {
-                throw new IllegalArgumentException("Can only match ASCII characters");
-            }
-            set.set(c);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder anyOf(String s) {
-            for (int i = 0; i < s.length(); i++) {
-                c(s.charAt(i));
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder anyOf(Set<Character> characters) {
-            for (Character c : characters) {
-                c(c);
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder range(char from, char toInclusive) {
-            for (char c = from; c <= toInclusive; c++) {
-                c(c);
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public AsciiMatcher build() {
-            return new AsciiMatcher(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

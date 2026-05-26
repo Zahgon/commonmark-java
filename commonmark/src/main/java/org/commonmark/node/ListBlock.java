@@ -12,11 +12,10 @@ public abstract class ListBlock extends Block {
      * @see <a href="https://spec.commonmark.org/0.31.2/#tight">CommonMark Spec for tight lists</a>
      */
     public boolean isTight() {
-        return tight;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setTight(boolean tight) {
-        this.tight = tight;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

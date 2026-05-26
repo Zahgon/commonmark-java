@@ -54,11 +54,11 @@ public class Bracket {
     public boolean bracketAfter = false;
 
     static public Bracket link(Text bracketNode, Position bracketPosition, Position contentPosition, Bracket previous, Delimiter previousDelimiter) {
-        return new Bracket(null, null, bracketNode, bracketPosition, contentPosition, previous, previousDelimiter);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static public Bracket withMarker(Text markerNode, Position markerPosition, Text bracketNode, Position bracketPosition, Position contentPosition, Bracket previous, Delimiter previousDelimiter) {
-        return new Bracket(markerNode, markerPosition, bracketNode, bracketPosition, contentPosition, previous, previousDelimiter);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private Bracket(Text markerNode, Position markerPosition, Text bracketNode, Position bracketPosition, Position contentPosition, Bracket previous, Delimiter previousDelimiter) {

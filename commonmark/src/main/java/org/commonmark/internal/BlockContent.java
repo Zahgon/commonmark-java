@@ -15,15 +15,10 @@ class BlockContent {
     }
 
     public void add(CharSequence line) {
-        if (lineCount != 0) {
-            sb.append('\n');
-        }
-        sb.append(line);
-        lineCount++;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getString() {
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

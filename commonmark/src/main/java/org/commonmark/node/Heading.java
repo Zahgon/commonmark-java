@@ -18,14 +18,14 @@ public class Heading extends Block {
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getLevel() {
-        return level;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLevel(int level) {
-        this.level = level;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

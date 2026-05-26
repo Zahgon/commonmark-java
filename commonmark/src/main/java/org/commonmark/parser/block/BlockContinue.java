@@ -11,19 +11,18 @@ public class BlockContinue {
     }
 
     public static BlockContinue none() {
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static BlockContinue atIndex(int newIndex) {
-        return new BlockContinueImpl(newIndex, -1, false);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static BlockContinue atColumn(int newColumn) {
-        return new BlockContinueImpl(-1, newColumn, false);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static BlockContinue finished() {
-        return new BlockContinueImpl(-1, -1, true);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

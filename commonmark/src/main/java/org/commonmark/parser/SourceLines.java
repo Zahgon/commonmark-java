@@ -1,7 +1,6 @@
 package org.commonmark.parser;
 
 import org.commonmark.node.SourceSpan;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,52 +14,34 @@ public class SourceLines {
     private final List<SourceLine> lines = new ArrayList<>();
 
     public static SourceLines empty() {
-        return new SourceLines();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static SourceLines of(SourceLine sourceLine) {
-        SourceLines sourceLines = new SourceLines();
-        sourceLines.addLine(sourceLine);
-        return sourceLines;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static SourceLines of(List<SourceLine> sourceLines) {
-        SourceLines result = new SourceLines();
-        result.lines.addAll(sourceLines);
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void addLine(SourceLine sourceLine) {
-        lines.add(sourceLine);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<SourceLine> getLines() {
-        return lines;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isEmpty() {
-        return lines.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getContent() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < lines.size(); i++) {
-            if (i != 0) {
-                sb.append('\n');
-            }
-            sb.append(lines.get(i).getContent());
-        }
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<SourceSpan> getSourceSpans() {
-        List<SourceSpan> sourceSpans = new ArrayList<>();
-        for (SourceLine line : lines) {
-            SourceSpan sourceSpan = line.getSourceSpan();
-            if (sourceSpan != null) {
-                sourceSpans.add(sourceSpan);
-            }
-        }
-        return sourceSpans;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

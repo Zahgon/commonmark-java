@@ -1,7 +1,6 @@
 package org.commonmark.renderer;
 
 import org.commonmark.node.Node;
-
 import java.util.Set;
 
 /**
@@ -27,6 +26,7 @@ public interface NodeRenderer {
      * @param rootNode the root (top-level) node
      */
     default void beforeRoot(Node rootNode) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -35,5 +35,6 @@ public interface NodeRenderer {
      * @param rootNode the root (top-level) node
      */
     default void afterRoot(Node rootNode) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

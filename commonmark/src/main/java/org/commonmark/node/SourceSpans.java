@@ -13,40 +13,18 @@ public class SourceSpans {
     private List<SourceSpan> sourceSpans;
 
     public static SourceSpans empty() {
-        return new SourceSpans();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<SourceSpan> getSourceSpans() {
-        return sourceSpans != null ? sourceSpans : List.of();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void addAllFrom(Iterable<? extends Node> nodes) {
-        for (Node node : nodes) {
-            addAll(node.getSourceSpans());
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void addAll(List<SourceSpan> other) {
-        if (other.isEmpty()) {
-            return;
-        }
-
-        if (sourceSpans == null) {
-            sourceSpans = new ArrayList<>();
-        }
-
-        if (sourceSpans.isEmpty()) {
-            sourceSpans.addAll(other);
-        } else {
-            int lastIndex = sourceSpans.size() - 1;
-            SourceSpan a = sourceSpans.get(lastIndex);
-            SourceSpan b = other.get(0);
-            if (a.getInputIndex() + a.getLength() == b.getInputIndex()) {
-                sourceSpans.set(lastIndex, SourceSpan.of(a.getLineIndex(), a.getColumnIndex(), a.getInputIndex(), a.getLength() + b.getLength()));
-                sourceSpans.addAll(other.subList(1, other.size()));
-            } else {
-                sourceSpans.addAll(other);
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -3,35 +3,18 @@ package org.commonmark.ext.gfm.tables.internal;
 import org.commonmark.ext.gfm.tables.*;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.NodeRenderer;
-
 import java.util.Set;
 
 abstract class TableNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<Class<? extends Node>> getNodeTypes() {
-        return Set.of(
-                TableBlock.class,
-                TableHead.class,
-                TableBody.class,
-                TableRow.class,
-                TableCell.class
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void render(Node node) {
-        if (node instanceof TableBlock) {
-            renderBlock((TableBlock) node);
-        } else if (node instanceof TableHead) {
-            renderHead((TableHead) node);
-        } else if (node instanceof TableBody) {
-            renderBody((TableBody) node);
-        } else if (node instanceof TableRow) {
-            renderRow((TableRow) node);
-        } else if (node instanceof TableCell) {
-            renderCell((TableCell) node);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected abstract void renderBlock(TableBlock node);

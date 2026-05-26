@@ -11,6 +11,7 @@ package org.commonmark.node;
 public class Image extends Node {
 
     private String destination;
+
     private String title;
 
     public Image() {
@@ -23,27 +24,27 @@ public class Image extends Node {
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getDestination() {
-        return destination;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDestination(String destination) {
-        this.destination = destination;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTitle() {
-        return title;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected String toStringAttributes() {
-        return "destination=" + destination + ", title=" + title;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

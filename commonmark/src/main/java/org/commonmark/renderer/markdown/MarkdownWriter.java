@@ -1,7 +1,6 @@
 package org.commonmark.renderer.markdown;
 
 import org.commonmark.text.CharMatcher;
-
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -13,13 +12,17 @@ public class MarkdownWriter {
     private final Appendable buffer;
 
     private int blockSeparator = 0;
+
     private char lastChar;
+
     private boolean atLineStart = true;
 
     // Stacks of settings that affect various rendering behaviors. The common pattern here is that callers use "push" to
     // change a setting, render some nodes, and then "pop" the setting off the stack again to restore previous state.
     private final LinkedList<String> prefixes = new LinkedList<>();
+
     private final LinkedList<Boolean> tight = new LinkedList<>();
+
     private final LinkedList<CharMatcher> rawEscapes = new LinkedList<>();
 
     public MarkdownWriter(Appendable out) {
@@ -30,16 +33,14 @@ public class MarkdownWriter {
      * Write the supplied string (raw/unescaped except if {@link #pushRawEscape} was used).
      */
     public void raw(String s) {
-        flushBlockSeparator();
-        write(s, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Write the supplied character (raw/unescaped except if {@link #pushRawEscape} was used).
      */
     public void raw(char c) {
-        flushBlockSeparator();
-        write(c);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -49,23 +50,14 @@ public class MarkdownWriter {
      * @param escape which characters to escape
      */
     public void text(String s, CharMatcher escape) {
-        if (s.isEmpty()) {
-            return;
-        }
-        flushBlockSeparator();
-        write(s, escape);
-
-        lastChar = s.charAt(s.length() - 1);
-        atLineStart = false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Write a newline (line terminator).
      */
     public void line() {
-        write('\n');
-        writePrefixes();
-        atLineStart = true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -73,10 +65,7 @@ public class MarkdownWriter {
      * straight away because if there are no more blocks to write we don't want a separator (at the end of the document).
      */
     public void block() {
-        // Remember whether this should be a tight or loose separator now because tight could get changed in between
-        // this and the next flush.
-        blockSeparator = isTight() ? 1 : 2;
-        atLineStart = true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -86,7 +75,7 @@ public class MarkdownWriter {
      * @param prefix the raw prefix string
      */
     public void pushPrefix(String prefix) {
-        prefixes.addLast(prefix);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -95,16 +84,14 @@ public class MarkdownWriter {
      * @param prefix the raw prefix string to write
      */
     public void writePrefix(String prefix) {
-        boolean tmp = atLineStart;
-        raw(prefix);
-        atLineStart = tmp;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Remove the last prefix from the top of the stack.
      */
     public void popPrefix() {
-        prefixes.removeLast();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,14 +103,14 @@ public class MarkdownWriter {
      * only future ones.
      */
     public void pushTight(boolean tight) {
-        this.tight.addLast(tight);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Remove the last "tight" setting from the top of the stack.
      */
     public void popTight() {
-        this.tight.removeLast();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -134,28 +121,28 @@ public class MarkdownWriter {
      * @param rawEscape the characters to escape in raw text
      */
     public void pushRawEscape(CharMatcher rawEscape) {
-        rawEscapes.add(rawEscape);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Remove the last raw escape from the top of the stack.
      */
     public void popRawEscape() {
-        rawEscapes.removeLast();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the last character that was written
      */
     public char getLastChar() {
-        return lastChar;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return whether we're at the line start (not counting any prefixes), i.e. after a {@link #line} or {@link #block}.
      */
     public boolean isAtLineStart() {
-        return atLineStart;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void write(String s, CharMatcher escape) {
@@ -171,7 +158,6 @@ public class MarkdownWriter {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         int length = s.length();
         if (length != 0) {
             lastChar = s.charAt(length - 1);
@@ -185,7 +171,6 @@ public class MarkdownWriter {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         lastChar = c;
         atLineStart = false;
     }

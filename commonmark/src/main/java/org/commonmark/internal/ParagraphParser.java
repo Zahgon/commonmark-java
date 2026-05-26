@@ -7,80 +7,59 @@ import org.commonmark.parser.SourceLines;
 import org.commonmark.parser.block.AbstractBlockParser;
 import org.commonmark.parser.block.BlockContinue;
 import org.commonmark.parser.block.ParserState;
-
 import java.util.List;
 
 public class ParagraphParser extends AbstractBlockParser {
 
     private final Paragraph block = new Paragraph();
+
     private final LinkReferenceDefinitionParser linkReferenceDefinitionParser = new LinkReferenceDefinitionParser();
 
     @Override
     public boolean canHaveLazyContinuationLines() {
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Block getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        if (!state.isBlank()) {
-            return BlockContinue.atIndex(state.getIndex());
-        } else {
-            return BlockContinue.none();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void addLine(SourceLine line) {
-        linkReferenceDefinitionParser.parse(line);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void addSourceSpan(SourceSpan sourceSpan) {
-        // Some source spans might belong to link reference definitions, others to the paragraph.
-        // The parser will handle that.
-        linkReferenceDefinitionParser.addSourceSpan(sourceSpan);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public List<DefinitionMap<?>> getDefinitions() {
-        var map = new DefinitionMap<>(LinkReferenceDefinition.class);
-        for (var def : linkReferenceDefinitionParser.getDefinitions()) {
-            map.putIfAbsent(def.getLabel(), def);
-        }
-        return List.of(map);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void closeBlock() {
-        for (var def : linkReferenceDefinitionParser.getDefinitions()) {
-            block.insertBefore(def);
-        }
-
-        if (linkReferenceDefinitionParser.getParagraphLines().isEmpty()) {
-            block.unlink();
-        } else {
-            block.setSourceSpans(linkReferenceDefinitionParser.getParagraphSourceSpans());
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
-        SourceLines lines = linkReferenceDefinitionParser.getParagraphLines();
-        if (!lines.isEmpty()) {
-            inlineParser.parse(lines, block);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SourceLines getParagraphLines() {
-        return linkReferenceDefinitionParser.getParagraphLines();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<SourceSpan> removeLines(int lines) {
-        return linkReferenceDefinitionParser.removeLines(lines);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

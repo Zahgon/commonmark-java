@@ -27,7 +27,9 @@ import org.commonmark.renderer.html.HtmlRenderer;
 public class HeadingAnchorExtension implements HtmlRenderer.HtmlRendererExtension {
 
     private final String defaultId;
+
     private final String idPrefix;
+
     private final String idSuffix;
 
     private HeadingAnchorExtension(Builder builder) {
@@ -40,24 +42,27 @@ public class HeadingAnchorExtension implements HtmlRenderer.HtmlRendererExtensio
      * @return the extension built with default settings
      */
     public static Extension create() {
-        return new HeadingAnchorExtension(builder());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return a builder to configure the extension settings
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.attributeProviderFactory(context -> HeadingIdAttributeProvider.create(defaultId, idPrefix, idSuffix));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Builder {
+
         private String defaultId = "id";
+
         private String idPrefix = "";
+
         private String idSuffix = "";
 
         /**
@@ -65,8 +70,7 @@ public class HeadingAnchorExtension implements HtmlRenderer.HtmlRendererExtensio
          * @return {@code this}
          */
         public Builder defaultId(String value) {
-            this.defaultId = value;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -74,8 +78,7 @@ public class HeadingAnchorExtension implements HtmlRenderer.HtmlRendererExtensio
          * @return {@code this}
          */
         public Builder idPrefix(String value) {
-            this.idPrefix = value;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -83,15 +86,14 @@ public class HeadingAnchorExtension implements HtmlRenderer.HtmlRendererExtensio
          * @return {@code this}
          */
         public Builder idSuffix(String value) {
-            this.idSuffix = value;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * @return a configured extension
          */
         public Extension build() {
-            return new HeadingAnchorExtension(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

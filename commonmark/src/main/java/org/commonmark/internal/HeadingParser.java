@@ -14,6 +14,7 @@ import org.commonmark.text.Characters;
 public class HeadingParser extends AbstractBlockParser {
 
     private final Heading block = new Heading();
+
     private final SourceLines content;
 
     public HeadingParser(int level, SourceLines content) {
@@ -23,48 +24,24 @@ public class HeadingParser extends AbstractBlockParser {
 
     @Override
     public Block getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState parserState) {
-        // In both ATX and Setext headings, once we have the heading markup, there's nothing more to parse.
-        return BlockContinue.none();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
-        inlineParser.parse(content, block);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Factory extends AbstractBlockParserFactory {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= Parsing.CODE_BLOCK_INDENT) {
-                return BlockStart.none();
-            }
-
-            SourceLine line = state.getLine();
-            int nextNonSpace = state.getNextNonSpaceIndex();
-            if (line.getContent().charAt(nextNonSpace) == '#') {
-                HeadingParser atxHeading = getAtxHeading(line.substring(nextNonSpace, line.getContent().length()));
-                if (atxHeading != null) {
-                    return BlockStart.of(atxHeading).atIndex(line.getContent().length());
-                }
-            }
-
-            int setextHeadingLevel = getSetextHeadingLevel(line.getContent(), nextNonSpace);
-            if (setextHeadingLevel > 0) {
-                SourceLines paragraph = matchedBlockParser.getParagraphLines();
-                if (!paragraph.isEmpty()) {
-                    return BlockStart.of(new HeadingParser(setextHeadingLevel, paragraph))
-                            .atIndex(line.getContent().length())
-                            .replaceParagraphLines(paragraph.getLines().size());
-                }
-            }
-
-            return BlockStart.none();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -75,29 +52,24 @@ public class HeadingParser extends AbstractBlockParser {
     private static HeadingParser getAtxHeading(SourceLine line) {
         Scanner scanner = Scanner.of(SourceLines.of(line));
         int level = scanner.matchMultiple('#');
-
         if (level == 0 || level > 6) {
             return null;
         }
-
         if (!scanner.hasNext()) {
             // End of line after markers is an empty heading
             return new HeadingParser(level, SourceLines.empty());
         }
-
         char next = scanner.peek();
         if (!(next == ' ' || next == '\t')) {
             return null;
         }
-
         scanner.whitespace();
         Position start = scanner.position();
         Position end = start;
         boolean hashCanEnd = true;
-
         while (scanner.hasNext()) {
             char c = scanner.peek();
-            switch (c) {
+            switch(c) {
                 case '#':
                     if (hashCanEnd) {
                         scanner.matchMultiple('#');
@@ -123,7 +95,6 @@ public class HeadingParser extends AbstractBlockParser {
                     end = scanner.position();
             }
         }
-
         SourceLines source = scanner.getSource(start, end);
         String content = source.getContent();
         if (content.isEmpty()) {
@@ -135,7 +106,7 @@ public class HeadingParser extends AbstractBlockParser {
     // spec: A setext heading underline is a sequence of = characters or a sequence of - characters, with no more than
     // 3 spaces indentation and any number of trailing spaces.
     private static int getSetextHeadingLevel(CharSequence line, int index) {
-        switch (line.charAt(index)) {
+        switch(line.charAt(index)) {
             case '=':
                 if (isSetextHeadingRest(line, index + 1, '=')) {
                     return 1;

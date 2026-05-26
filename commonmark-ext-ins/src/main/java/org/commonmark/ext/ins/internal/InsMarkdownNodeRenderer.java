@@ -7,6 +7,7 @@ import org.commonmark.renderer.markdown.MarkdownWriter;
 public class InsMarkdownNodeRenderer extends InsNodeRenderer {
 
     private final MarkdownNodeRendererContext context;
+
     private final MarkdownWriter writer;
 
     public InsMarkdownNodeRenderer(MarkdownNodeRendererContext context) {
@@ -16,9 +17,7 @@ public class InsMarkdownNodeRenderer extends InsNodeRenderer {
 
     @Override
     public void render(Node node) {
-        writer.raw("++");
-        renderChildren(node);
-        writer.raw("++");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

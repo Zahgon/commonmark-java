@@ -10,109 +10,22 @@ public class LinkScanner {
      * the next line.
      */
     public static boolean scanLinkLabelContent(Scanner scanner) {
-        while (scanner.hasNext()) {
-            switch (scanner.peek()) {
-                case '\\':
-                    scanner.next();
-                    if (isEscapable(scanner.peek())) {
-                        scanner.next();
-                    }
-                    break;
-                case ']':
-                    return true;
-                case '[':
-                    // spec: Unescaped square bracket characters are not allowed inside the opening and closing
-                    // square brackets of link labels.
-                    return false;
-                default:
-                    scanner.next();
-            }
-        }
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Attempt to scan a link destination, stopping after the destination or returning false.
      */
     public static boolean scanLinkDestination(Scanner scanner) {
-        if (!scanner.hasNext()) {
-            return false;
-        }
-
-        if (scanner.next('<')) {
-            while (scanner.hasNext()) {
-                switch (scanner.peek()) {
-                    case '\\':
-                        scanner.next();
-                        if (isEscapable(scanner.peek())) {
-                            scanner.next();
-                        }
-                        break;
-                    case '\n':
-                    case '<':
-                        return false;
-                    case '>':
-                        scanner.next();
-                        return true;
-                    default:
-                        scanner.next();
-                }
-            }
-            return false;
-        } else {
-            return scanLinkDestinationWithBalancedParens(scanner);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static boolean scanLinkTitle(Scanner scanner) {
-        if (!scanner.hasNext()) {
-            return false;
-        }
-
-        char endDelimiter;
-        switch (scanner.peek()) {
-            case '"':
-                endDelimiter = '"';
-                break;
-            case '\'':
-                endDelimiter = '\'';
-                break;
-            case '(':
-                endDelimiter = ')';
-                break;
-            default:
-                return false;
-        }
-        scanner.next();
-
-        if (!scanLinkTitleContent(scanner, endDelimiter)) {
-            return false;
-        }
-        if (!scanner.hasNext()) {
-            return false;
-        }
-        scanner.next();
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static boolean scanLinkTitleContent(Scanner scanner, char endDelimiter) {
-        while (scanner.hasNext()) {
-            char c = scanner.peek();
-            if (c == '\\') {
-                scanner.next();
-                if (isEscapable(scanner.peek())) {
-                    scanner.next();
-                }
-            } else if (c == endDelimiter) {
-                return true;
-            } else if (endDelimiter == ')' && c == '(') {
-                // unescaped '(' in title within parens is invalid
-                return false;
-            } else {
-                scanner.next();
-            }
-        }
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     // spec: a nonempty sequence of characters that does not start with <, does not include ASCII space or control
@@ -123,7 +36,7 @@ public class LinkScanner {
         boolean empty = true;
         while (scanner.hasNext()) {
             char c = scanner.peek();
-            switch (c) {
+            switch(c) {
                 case ' ':
                     return !empty;
                 case '\\':
@@ -162,7 +75,7 @@ public class LinkScanner {
     }
 
     private static boolean isEscapable(char c) {
-        switch (c) {
+        switch(c) {
             case '!':
             case '"':
             case '#':

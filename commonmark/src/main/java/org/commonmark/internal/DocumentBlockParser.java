@@ -12,22 +12,21 @@ public class DocumentBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean isContainer() {
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canContain(Block block) {
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Document getBlock() {
-        return document;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        return BlockContinue.atIndex(state.getIndex());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

@@ -1,7 +1,6 @@
 package org.commonmark.parser;
 
 import org.commonmark.node.SourceSpan;
-
 import java.util.Objects;
 
 /**
@@ -12,10 +11,11 @@ import java.util.Objects;
 public class SourceLine {
 
     private final CharSequence content;
+
     private final SourceSpan sourceSpan;
 
     public static SourceLine of(CharSequence content, SourceSpan sourceSpan) {
-        return new SourceLine(content, sourceSpan);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private SourceLine(CharSequence content, SourceSpan sourceSpan) {
@@ -24,24 +24,14 @@ public class SourceLine {
     }
 
     public CharSequence getContent() {
-        return content;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SourceSpan getSourceSpan() {
-        return sourceSpan;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SourceLine substring(int beginIndex, int endIndex) {
-        CharSequence newContent = content.subSequence(beginIndex, endIndex);
-        SourceSpan newSourceSpan = null;
-        if (sourceSpan != null) {
-            int length = endIndex - beginIndex;
-            if (length != 0) {
-                int columnIndex = sourceSpan.getColumnIndex() + beginIndex;
-                int inputIndex = sourceSpan.getInputIndex() + beginIndex;
-                newSourceSpan = SourceSpan.of(sourceSpan.getLineIndex(), columnIndex, inputIndex, length);
-            }
-        }
-        return SourceLine.of(newContent, newSourceSpan);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

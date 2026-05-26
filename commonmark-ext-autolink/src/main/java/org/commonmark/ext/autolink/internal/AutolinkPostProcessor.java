@@ -7,7 +7,6 @@ import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;
 import org.nibor.autolink.Span;
-
 import java.util.*;
 
 public class AutolinkPostProcessor implements PostProcessor {
@@ -18,14 +17,12 @@ public class AutolinkPostProcessor implements PostProcessor {
         if (linkTypes == null) {
             throw new NullPointerException("linkTypes must not be null");
         }
-
         if (linkTypes.isEmpty()) {
             throw new IllegalArgumentException("linkTypes must not be empty");
         }
-
         var types = EnumSet.noneOf(LinkType.class);
         for (AutolinkType linkType : linkTypes) {
-            switch (linkType) {
+            switch(linkType) {
                 case URL:
                     types.add(LinkType.URL);
                     break;
@@ -37,39 +34,29 @@ public class AutolinkPostProcessor implements PostProcessor {
                     break;
             }
         }
-
-        this.linkExtractor = LinkExtractor.builder()
-                .linkTypes(types)
-                .build();
+        this.linkExtractor = LinkExtractor.builder().linkTypes(types).build();
     }
 
     @Override
     public Node process(Node node) {
-        AutolinkVisitor autolinkVisitor = new AutolinkVisitor();
-        node.accept(autolinkVisitor);
-        return node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void linkify(Text originalTextNode) {
         String literal = originalTextNode.getLiteral();
-
         Node lastNode = originalTextNode;
         List<SourceSpan> sourceSpans = originalTextNode.getSourceSpans();
         SourceSpan sourceSpan = sourceSpans.size() == 1 ? sourceSpans.get(0) : null;
-
         Iterator<Span> spans = linkExtractor.extractSpans(literal).iterator();
         while (spans.hasNext()) {
             Span span = spans.next();
-
             if (lastNode == originalTextNode && !spans.hasNext() && !(span instanceof LinkSpan)) {
                 // Didn't find any links, don't bother changing existing node.
                 return;
             }
-
             Text textNode = createTextNode(literal, span, sourceSpan);
             if (span instanceof LinkSpan) {
                 String destination = getDestination((LinkSpan) span, textNode.getLiteral());
-
                 Link linkNode = new Link(destination, null);
                 linkNode.appendChild(textNode);
                 linkNode.setSourceSpans(textNode.getSourceSpans());
@@ -78,7 +65,6 @@ public class AutolinkPostProcessor implements PostProcessor {
                 lastNode = insertNode(textNode, lastNode);
             }
         }
-
         // Original node no longer needed
         originalTextNode.unlink();
     }
@@ -96,7 +82,6 @@ public class AutolinkPostProcessor implements PostProcessor {
 
     private static String getDestination(LinkSpan linkSpan, String linkText) {
         var type = linkSpan.getType();
-
         if (type == LinkType.EMAIL) {
             return "mailto:" + linkText;
         } else if (type == LinkType.WWW) {
@@ -113,20 +98,17 @@ public class AutolinkPostProcessor implements PostProcessor {
     }
 
     private class AutolinkVisitor extends AbstractVisitor {
+
         int inLink = 0;
 
         @Override
         public void visit(Link link) {
-            inLink++;
-            super.visit(link);
-            inLink--;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void visit(Text text) {
-            if (inLink == 0) {
-                linkify(text);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

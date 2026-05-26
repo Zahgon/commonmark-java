@@ -10,7 +10,6 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererContext;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererFactory;
 import org.commonmark.renderer.markdown.MarkdownRenderer;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.HashSet;
@@ -25,8 +24,7 @@ import java.util.Set;
  * {@link HtmlRenderer.Builder#extensions(Iterable)}).
  * Parsed alerts become {@link Alert} blocks.
  */
-public class AlertsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension,
-        MarkdownRenderer.MarkdownRendererExtension {
+public class AlertsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, MarkdownRenderer.MarkdownRendererExtension {
 
     static final Set<String> STANDARD_TYPES = Set.of("NOTE", "TIP", "IMPORTANT", "WARNING", "CAUTION");
 
@@ -37,44 +35,33 @@ public class AlertsExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     public static Extension create() {
-        return builder().build();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        var allowedTypes = new HashSet<>(STANDARD_TYPES);
-        allowedTypes.addAll(customTypes.keySet());
-        parserBuilder.postProcessor(new AlertPostProcessor(allowedTypes));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(context -> new AlertHtmlNodeRenderer(context, customTypes));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(MarkdownRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new MarkdownNodeRendererFactory() {
-            @Override
-            public NodeRenderer create(MarkdownNodeRendererContext context) {
-                return new AlertMarkdownNodeRenderer(context);
-            }
-
-            @Override
-            public Set<Character> getSpecialCharacters() {
-                return Set.of();
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Builder for configuring the alerts extension.
      */
     public static class Builder {
+
         private final Map<String, String> customTypes = new HashMap<>();
 
         /**
@@ -88,24 +75,14 @@ public class AlertsExtension implements Parser.ParserExtension, HtmlRenderer.Htm
          * @return {@code this}
          */
         public Builder addCustomType(String type, String title) {
-            if (type == null || type.isEmpty()) {
-                throw new IllegalArgumentException("Type must not be null or empty");
-            }
-            if (title == null || title.isEmpty()) {
-                throw new IllegalArgumentException("Title must not be null or empty");
-            }
-            if (!type.equals(type.toUpperCase(Locale.ROOT))) {
-                throw new IllegalArgumentException("Type must be uppercase: " + type);
-            }
-            customTypes.put(type, title);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * @return a configured {@link Extension}
          */
         public Extension build() {
-            return new AlertsExtension(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

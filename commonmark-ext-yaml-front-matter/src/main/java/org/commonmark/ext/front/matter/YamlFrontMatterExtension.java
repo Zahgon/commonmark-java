@@ -23,10 +23,10 @@ public class YamlFrontMatterExtension implements Parser.ParserExtension {
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new YamlFrontMatterBlockParser.Factory());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Extension create() {
-        return new YamlFrontMatterExtension();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

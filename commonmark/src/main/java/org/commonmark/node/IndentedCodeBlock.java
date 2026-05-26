@@ -18,14 +18,14 @@ public class IndentedCodeBlock extends Block {
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getLiteral() {
-        return literal;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLiteral(String literal) {
-        this.literal = literal;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

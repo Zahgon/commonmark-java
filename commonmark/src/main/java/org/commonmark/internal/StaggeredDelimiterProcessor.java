@@ -2,7 +2,6 @@ package org.commonmark.internal;
 
 import org.commonmark.parser.delimiter.DelimiterProcessor;
 import org.commonmark.parser.delimiter.DelimiterRun;
-
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -15,49 +14,33 @@ import java.util.ListIterator;
 class StaggeredDelimiterProcessor implements DelimiterProcessor {
 
     private final char delim;
+
     private int minLength = 0;
-    private LinkedList<DelimiterProcessor> processors = new LinkedList<>(); // in reverse getMinLength order
+
+    // in reverse getMinLength order
+    private LinkedList<DelimiterProcessor> processors = new LinkedList<>();
 
     StaggeredDelimiterProcessor(char delim) {
         this.delim = delim;
     }
 
-
     @Override
     public char getOpeningCharacter() {
-        return delim;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public char getClosingCharacter() {
-        return delim;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getMinLength() {
-        return minLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     void add(DelimiterProcessor dp) {
-        final int len = dp.getMinLength();
-        ListIterator<DelimiterProcessor> it = processors.listIterator();
-        boolean added = false;
-        while (it.hasNext()) {
-            DelimiterProcessor p = it.next();
-            int pLen = p.getMinLength();
-            if (len > pLen) {
-                it.previous();
-                it.add(dp);
-                added = true;
-                break;
-            } else if (len == pLen) {
-                throw new IllegalArgumentException("Cannot add two delimiter processors for char '" + delim + "' and minimum length " + len + "; conflicting processors: " + p + ", " + dp);
-            }
-        }
-        if (!added) {
-            processors.add(dp);
-            this.minLength = len;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private DelimiterProcessor findProcessor(int len) {
@@ -71,6 +54,6 @@ class StaggeredDelimiterProcessor implements DelimiterProcessor {
 
     @Override
     public int process(DelimiterRun openingRun, DelimiterRun closingRun) {
-        return findProcessor(openingRun.length()).process(openingRun, closingRun);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

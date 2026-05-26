@@ -15,27 +15,31 @@ package org.commonmark.node;
 public class FencedCodeBlock extends Block {
 
     private String fenceCharacter;
+
     private Integer openingFenceLength;
+
     private Integer closingFenceLength;
+
     private int fenceIndent;
 
     private String info;
+
     private String literal;
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the fence character that was used, e.g. {@code `} or {@code ~}, if available, or null otherwise
      */
     public String getFenceCharacter() {
-        return fenceCharacter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setFenceCharacter(String fenceCharacter) {
-        this.fenceCharacter = fenceCharacter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -43,15 +47,11 @@ public class FencedCodeBlock extends Block {
      * block) if available, or null otherwise
      */
     public Integer getOpeningFenceLength() {
-        return openingFenceLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOpeningFenceLength(Integer openingFenceLength) {
-        if (openingFenceLength != null && openingFenceLength < 3) {
-            throw new IllegalArgumentException("openingFenceLength needs to be >= 3");
-        }
-        checkFenceLengths(openingFenceLength, closingFenceLength);
-        this.openingFenceLength = openingFenceLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -59,42 +59,38 @@ public class FencedCodeBlock extends Block {
      * block) if available, or null otherwise
      */
     public Integer getClosingFenceLength() {
-        return closingFenceLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setClosingFenceLength(Integer closingFenceLength) {
-        if (closingFenceLength != null && closingFenceLength < 3) {
-            throw new IllegalArgumentException("closingFenceLength needs to be >= 3");
-        }
-        checkFenceLengths(openingFenceLength, closingFenceLength);
-        this.closingFenceLength = closingFenceLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getFenceIndent() {
-        return fenceIndent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setFenceIndent(int fenceIndent) {
-        this.fenceIndent = fenceIndent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @see <a href="http://spec.commonmark.org/0.31.2/#info-string">CommonMark spec</a>
      */
     public String getInfo() {
-        return info;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setInfo(String info) {
-        this.info = info;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getLiteral() {
-        return literal;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLiteral(String literal) {
-        this.literal = literal;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

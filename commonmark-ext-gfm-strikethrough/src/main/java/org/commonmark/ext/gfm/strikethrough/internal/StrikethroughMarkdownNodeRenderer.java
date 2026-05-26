@@ -8,6 +8,7 @@ import org.commonmark.renderer.markdown.MarkdownWriter;
 public class StrikethroughMarkdownNodeRenderer extends StrikethroughNodeRenderer {
 
     private final MarkdownNodeRendererContext context;
+
     private final MarkdownWriter writer;
 
     public StrikethroughMarkdownNodeRenderer(MarkdownNodeRendererContext context) {
@@ -17,10 +18,7 @@ public class StrikethroughMarkdownNodeRenderer extends StrikethroughNodeRenderer
 
     @Override
     public void render(Node node) {
-        Strikethrough strikethrough = (Strikethrough) node;
-        writer.raw(strikethrough.getOpeningDelimiter());
-        renderChildren(node);
-        writer.raw(strikethrough.getClosingDelimiter());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

@@ -12,7 +12,6 @@ import org.commonmark.renderer.markdown.MarkdownNodeRendererContext;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererFactory;
 import org.commonmark.renderer.markdown.MarkdownRenderer;
 import org.commonmark.renderer.text.TextContentRenderer;
-
 import java.util.Set;
 
 /**
@@ -28,43 +27,32 @@ import java.util.Set;
  *
  * @see <a href="https://github.github.com/gfm/#tables-extension-">Tables (extension) in GitHub Flavored Markdown Spec</a>
  */
-public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension,
-        TextContentRenderer.TextContentRendererExtension, MarkdownRenderer.MarkdownRendererExtension {
+public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, TextContentRenderer.TextContentRendererExtension, MarkdownRenderer.MarkdownRendererExtension {
 
     private TablesExtension() {
     }
 
     public static Extension create() {
-        return new TablesExtension();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new TableBlockParser.Factory());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(TableHtmlNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(TextContentRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(TableTextContentNodeRenderer::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void extend(MarkdownRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new MarkdownNodeRendererFactory() {
-            @Override
-            public NodeRenderer create(MarkdownNodeRendererContext context) {
-                return new TableMarkdownNodeRenderer(context);
-            }
-
-            @Override
-            public Set<Character> getSpecialCharacters() {
-                return Set.of('|');
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

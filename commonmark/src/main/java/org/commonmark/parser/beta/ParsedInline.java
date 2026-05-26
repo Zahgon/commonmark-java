@@ -2,7 +2,6 @@ package org.commonmark.parser.beta;
 
 import org.commonmark.internal.inline.ParsedInlineImpl;
 import org.commonmark.node.Node;
-
 import java.util.Objects;
 
 /**
@@ -13,12 +12,10 @@ import java.util.Objects;
 public interface ParsedInline {
 
     static ParsedInline none() {
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static ParsedInline of(Node node, Position position) {
-        Objects.requireNonNull(node, "node must not be null");
-        Objects.requireNonNull(position, "position must not be null");
-        return new ParsedInlineImpl(node, position);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

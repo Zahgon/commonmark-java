@@ -7,12 +7,12 @@ import org.commonmark.node.*;
 import org.commonmark.renderer.NodeRenderer;
 import org.commonmark.renderer.markdown.MarkdownNodeRendererContext;
 import org.commonmark.renderer.markdown.MarkdownWriter;
-
 import java.util.Set;
 
 public class FootnoteMarkdownNodeRenderer implements NodeRenderer {
 
     private final MarkdownWriter writer;
+
     private final MarkdownNodeRendererContext context;
 
     public FootnoteMarkdownNodeRenderer(MarkdownNodeRendererContext context) {
@@ -22,18 +22,12 @@ public class FootnoteMarkdownNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<Class<? extends Node>> getNodeTypes() {
-        return Set.of(FootnoteReference.class, InlineFootnote.class, FootnoteDefinition.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void render(Node node) {
-        if (node instanceof FootnoteReference) {
-            renderReference((FootnoteReference) node);
-        } else if (node instanceof InlineFootnote) {
-            renderInline((InlineFootnote) node);
-        } else if (node instanceof FootnoteDefinition) {
-            renderDefinition((FootnoteDefinition) node);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderReference(FootnoteReference ref) {
@@ -53,7 +47,6 @@ public class FootnoteMarkdownNodeRenderer implements NodeRenderer {
         writer.raw("[^");
         writer.raw(def.getLabel());
         writer.raw("]: ");
-
         writer.pushPrefix("    ");
         renderChildren(def);
         writer.popPrefix();

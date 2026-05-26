@@ -7,6 +7,7 @@ import org.commonmark.node.Node;
 public class StrikethroughTextContentNodeRenderer extends StrikethroughNodeRenderer {
 
     private final TextContentNodeRendererContext context;
+
     private final TextContentWriter textContent;
 
     public StrikethroughTextContentNodeRenderer(TextContentNodeRendererContext context) {
@@ -16,9 +17,7 @@ public class StrikethroughTextContentNodeRenderer extends StrikethroughNodeRende
 
     @Override
     public void render(Node node) {
-        textContent.write('/');
-        renderChildren(node);
-        textContent.write('/');
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

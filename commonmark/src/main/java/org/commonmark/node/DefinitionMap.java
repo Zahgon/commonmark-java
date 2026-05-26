@@ -1,7 +1,6 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.util.Escaping;
-
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,6 +15,7 @@ import java.util.Set;
 public class DefinitionMap<D> {
 
     private final Class<D> type;
+
     // LinkedHashMap for determinism and to preserve document order
     private final Map<String, D> definitions = new LinkedHashMap<>();
 
@@ -24,14 +24,11 @@ public class DefinitionMap<D> {
     }
 
     public Class<D> getType() {
-        return type;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void addAll(DefinitionMap<D> that) {
-        for (var entry : that.definitions.entrySet()) {
-            // Note that keys are already normalized, so we can add them directly
-            definitions.putIfAbsent(entry.getKey(), entry.getValue());
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -41,10 +38,7 @@ public class DefinitionMap<D> {
      * The label is normalized by the definition map before storing.
      */
     public D putIfAbsent(String label, D definition) {
-        String normalizedLabel = Escaping.normalizeLabelContent(label);
-
-        // spec: When there are multiple matching link reference definitions, the first is used
-        return definitions.putIfAbsent(normalizedLabel, definition);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -53,15 +47,14 @@ public class DefinitionMap<D> {
      * @return the value or null
      */
     public D get(String label) {
-        String normalizedLabel = Escaping.normalizeLabelContent(label);
-        return definitions.get(normalizedLabel);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Set<String> keySet() {
-        return definitions.keySet();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Collection<D> values() {
-        return definitions.values();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -2,7 +2,6 @@ package org.commonmark.ext.image.attributes;
 
 import org.commonmark.node.CustomNode;
 import org.commonmark.node.Delimited;
-
 import java.util.Map;
 
 /**
@@ -18,20 +17,20 @@ public class ImageAttributes extends CustomNode implements Delimited {
 
     @Override
     public String getOpeningDelimiter() {
-        return "{";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getClosingDelimiter() {
-        return "}";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Map<String, String> getAttributes() {
-        return attributes;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected String toStringAttributes() {
-        return "imageAttributes=" + attributes;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

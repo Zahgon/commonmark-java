@@ -12,39 +12,11 @@ import java.util.Map;
 public class Html5Entities {
 
     private static final Map<String, String> NAMED_CHARACTER_REFERENCES = readEntities();
+
     private static final String ENTITY_PATH = "/org/commonmark/internal/util/entities.txt";
 
     public static String entityToString(String input) {
-        if (!input.startsWith("&") || !input.endsWith(";")) {
-            return input;
-        }
-
-        String value = input.substring(1, input.length() - 1);
-        if (value.startsWith("#")) {
-            value = value.substring(1);
-            int base = 10;
-            if (value.startsWith("x") || value.startsWith("X")) {
-                value = value.substring(1);
-                base = 16;
-            }
-
-            try {
-                int codePoint = Integer.parseInt(value, base);
-                if (codePoint == 0) {
-                    return "\uFFFD";
-                }
-                return new String(Character.toChars(codePoint));
-            } catch (IllegalArgumentException e) {
-                return "\uFFFD";
-            }
-        } else {
-            String s = NAMED_CHARACTER_REFERENCES.get(value);
-            if (s != null) {
-                return s;
-            } else {
-                return input;
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static Map<String, String> readEntities() {

@@ -4,12 +4,12 @@ import org.commonmark.ext.gfm.tables.*;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.html.HtmlNodeRendererContext;
 import org.commonmark.renderer.html.HtmlWriter;
-
 import java.util.Map;
 
 public class TableHtmlNodeRenderer extends TableNodeRenderer {
 
     private final HtmlWriter htmlWriter;
+
     private final HtmlNodeRendererContext context;
 
     public TableHtmlNodeRenderer(HtmlNodeRendererContext context) {
@@ -19,48 +19,27 @@ public class TableHtmlNodeRenderer extends TableNodeRenderer {
 
     @Override
     protected void renderBlock(TableBlock tableBlock) {
-        htmlWriter.line();
-        htmlWriter.tag("table", getAttributes(tableBlock, "table"));
-        renderChildren(tableBlock);
-        htmlWriter.tag("/table");
-        htmlWriter.line();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderHead(TableHead tableHead) {
-        htmlWriter.line();
-        htmlWriter.tag("thead", getAttributes(tableHead, "thead"));
-        renderChildren(tableHead);
-        htmlWriter.tag("/thead");
-        htmlWriter.line();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderBody(TableBody tableBody) {
-        htmlWriter.line();
-        htmlWriter.tag("tbody", getAttributes(tableBody, "tbody"));
-        renderChildren(tableBody);
-        htmlWriter.tag("/tbody");
-        htmlWriter.line();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderRow(TableRow tableRow) {
-        htmlWriter.line();
-        htmlWriter.tag("tr", getAttributes(tableRow, "tr"));
-        renderChildren(tableRow);
-        htmlWriter.tag("/tr");
-        htmlWriter.line();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void renderCell(TableCell tableCell) {
-        String tagName = tableCell.isHeader() ? "th" : "td";
-        htmlWriter.line();
-        htmlWriter.tag(tagName, getCellAttributes(tableCell, tagName));
-        renderChildren(tableCell);
-        htmlWriter.tag("/" + tagName);
-        htmlWriter.line();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private Map<String, String> getAttributes(Node node, String tagName) {
@@ -76,7 +55,7 @@ public class TableHtmlNodeRenderer extends TableNodeRenderer {
     }
 
     private static String getAlignValue(TableCell.Alignment alignment) {
-        switch (alignment) {
+        switch(alignment) {
             case LEFT:
                 return "left";
             case CENTER:

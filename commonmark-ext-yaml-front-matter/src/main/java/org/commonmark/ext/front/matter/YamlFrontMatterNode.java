@@ -1,11 +1,12 @@
 package org.commonmark.ext.front.matter;
 
 import org.commonmark.node.CustomNode;
-
 import java.util.List;
 
 public class YamlFrontMatterNode extends CustomNode {
+
     private String key;
+
     private List<String> values;
 
     public YamlFrontMatterNode(String key, List<String> values) {
@@ -14,18 +15,18 @@ public class YamlFrontMatterNode extends CustomNode {
     }
 
     public String getKey() {
-        return key;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setKey(String key) {
-        this.key = key;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<String> getValues() {
-        return values;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setValues(List<String> values) {
-        this.values = values;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

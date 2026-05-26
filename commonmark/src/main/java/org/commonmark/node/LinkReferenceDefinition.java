@@ -14,7 +14,9 @@ package org.commonmark.node;
 public class LinkReferenceDefinition extends Block {
 
     private String label;
+
     private String destination;
+
     private String title;
 
     public LinkReferenceDefinition() {
@@ -27,31 +29,31 @@ public class LinkReferenceDefinition extends Block {
     }
 
     public String getLabel() {
-        return label;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLabel(String label) {
-        this.label = label;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getDestination() {
-        return destination;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDestination(String destination) {
-        this.destination = destination;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTitle() {
-        return title;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

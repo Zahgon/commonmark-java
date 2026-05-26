@@ -12,21 +12,13 @@ import org.commonmark.parser.beta.InlineContentParserFactory;
 import org.commonmark.parser.block.*;
 import org.commonmark.parser.delimiter.DelimiterProcessor;
 import org.commonmark.text.Characters;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
 public class DocumentParser implements ParserState {
 
-    private static final Set<Class<? extends Block>> CORE_FACTORY_TYPES = new LinkedHashSet<>(List.of(
-            BlockQuote.class,
-            Heading.class,
-            FencedCodeBlock.class,
-            HtmlBlock.class,
-            ThematicBreak.class,
-            ListBlock.class,
-            IndentedCodeBlock.class));
+    private static final Set<Class<? extends Block>> CORE_FACTORY_TYPES = new LinkedHashSet<>(List.of(BlockQuote.class, Heading.class, FencedCodeBlock.class, HtmlBlock.class, ThematicBreak.class, ListBlock.class, IndentedCodeBlock.class));
 
     private static final Map<Class<? extends Block>, BlockParserFactory> NODES_TO_CORE_FACTORIES;
 
@@ -65,28 +57,38 @@ public class DocumentParser implements ParserState {
     private boolean columnIsInTab;
 
     private int nextNonSpace = 0;
+
     private int nextNonSpaceColumn = 0;
+
     private int indent = 0;
+
     private boolean blank;
 
     private final List<BlockParserFactory> blockParserFactories;
+
     private final InlineParserFactory inlineParserFactory;
+
     private final List<InlineContentParserFactory> inlineContentParserFactories;
+
     private final List<DelimiterProcessor> delimiterProcessors;
+
     private final List<LinkProcessor> linkProcessors;
+
     private final Set<Character> linkMarkers;
+
     private final IncludeSourceSpans includeSourceSpans;
+
     private final int maxOpenBlockParsers;
+
     private final DocumentBlockParser documentBlockParser;
+
     private final Definitions definitions = new Definitions();
 
     private final List<OpenBlockParser> openBlockParsers = new ArrayList<>();
+
     private final List<BlockParser> allBlockParsers = new ArrayList<>();
 
-    public DocumentParser(List<BlockParserFactory> blockParserFactories, InlineParserFactory inlineParserFactory,
-                          List<InlineContentParserFactory> inlineContentParserFactories, List<DelimiterProcessor> delimiterProcessors,
-                          List<LinkProcessor> linkProcessors, Set<Character> linkMarkers,
-                          IncludeSourceSpans includeSourceSpans, int maxOpenBlockParsers) {
+    public DocumentParser(List<BlockParserFactory> blockParserFactories, InlineParserFactory inlineParserFactory, List<InlineContentParserFactory> inlineContentParserFactories, List<DelimiterProcessor> delimiterProcessors, List<LinkProcessor> linkProcessors, Set<Character> linkMarkers, IncludeSourceSpans includeSourceSpans, int maxOpenBlockParsers) {
         this.blockParserFactories = blockParserFactories;
         this.inlineParserFactory = inlineParserFactory;
         this.inlineContentParserFactories = inlineContentParserFactories;
@@ -95,104 +97,66 @@ public class DocumentParser implements ParserState {
         this.linkMarkers = linkMarkers;
         this.includeSourceSpans = includeSourceSpans;
         this.maxOpenBlockParsers = maxOpenBlockParsers;
-
         this.documentBlockParser = new DocumentBlockParser();
         activateBlockParser(new OpenBlockParser(documentBlockParser, 0));
     }
 
     public static Set<Class<? extends Block>> getDefaultBlockParserTypes() {
-        return CORE_FACTORY_TYPES;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static List<BlockParserFactory> calculateBlockParserFactories(List<BlockParserFactory> customBlockParserFactories, Set<Class<? extends Block>> enabledBlockTypes) {
-        // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        List<BlockParserFactory> list = new ArrayList<>(customBlockParserFactories);
-        for (Class<? extends Block> blockType : enabledBlockTypes) {
-            list.add(NODES_TO_CORE_FACTORIES.get(blockType));
-        }
-        return list;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static void checkEnabledBlockTypes(Set<Class<? extends Block>> enabledBlockTypes) {
-        for (Class<? extends Block> enabledBlockType : enabledBlockTypes) {
-            if (!NODES_TO_CORE_FACTORIES.containsKey(enabledBlockType)) {
-                throw new IllegalArgumentException("Can't enable block type " + enabledBlockType + ", possible options are: " + NODES_TO_CORE_FACTORIES.keySet());
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * The main parsing function. Returns a parsed document AST.
      */
     public Document parse(String input) {
-        int lineStart = 0;
-        int lineBreak;
-        while ((lineBreak = Characters.findLineBreak(input, lineStart)) != -1) {
-            String line = input.substring(lineStart, lineBreak);
-            parseLine(line, lineStart);
-            if (lineBreak + 1 < input.length() && input.charAt(lineBreak) == '\r' && input.charAt(lineBreak + 1) == '\n') {
-                lineStart = lineBreak + 2;
-            } else {
-                lineStart = lineBreak + 1;
-            }
-        }
-        if (!input.isEmpty() && (lineStart == 0 || lineStart < input.length())) {
-            String line = input.substring(lineStart);
-            parseLine(line, lineStart);
-        }
-
-        return finalizeAndProcess();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Document parse(Reader input) throws IOException {
-        var lineReader = new LineReader(input);
-        int inputIndex = 0;
-        String line;
-        while ((line = lineReader.readLine()) != null) {
-            parseLine(line, inputIndex);
-            inputIndex += line.length();
-            var eol = lineReader.getLineTerminator();
-            if (eol != null) {
-                inputIndex += eol.length();
-            }
-        }
-
-        return finalizeAndProcess();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public SourceLine getLine() {
-        return line;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getIndex() {
-        return index;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getNextNonSpaceIndex() {
-        return nextNonSpace;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getColumn() {
-        return column;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getIndent() {
-        return indent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean isBlank() {
-        return blank;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockParser getActiveBlockParser() {
-        return openBlockParsers.get(openBlockParsers.size() - 1).blockParser;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -201,7 +165,6 @@ public class DocumentParser implements ParserState {
      */
     private void parseLine(String ln, int inputIndex) {
         setLine(ln, inputIndex);
-
         // For each containing block, try to parse the associated line start.
         // The document will always match, so we can skip the first block parser and start at 1 matches
         int matches = 1;
@@ -209,7 +172,6 @@ public class DocumentParser implements ParserState {
             OpenBlockParser openBlockParser = openBlockParsers.get(i);
             BlockParser blockParser = openBlockParser.blockParser;
             findNextNonSpace();
-
             BlockContinue result = blockParser.tryContinue(this);
             if (result instanceof BlockContinueImpl) {
                 BlockContinueImpl blockContinue = (BlockContinueImpl) result;
@@ -230,47 +192,38 @@ public class DocumentParser implements ParserState {
                 break;
             }
         }
-
         int unmatchedBlocks = openBlockParsers.size() - matches;
         BlockParser blockParser = openBlockParsers.get(matches - 1).blockParser;
         boolean startedNewBlock = false;
-
         int lastIndex = index;
-
         // Unless last matched container is a code block, try new container starts,
         // adding children to the last matched container:
         boolean tryBlockStarts = blockParser.getBlock() instanceof Paragraph || blockParser.isContainer();
         while (tryBlockStarts) {
             lastIndex = index;
             findNextNonSpace();
-
             // this is a little performance optimization:
             if (isBlank() || (indent < Parsing.CODE_BLOCK_INDENT && Characters.isLetter(this.line.getContent(), nextNonSpace))) {
                 setNewIndex(nextNonSpace);
                 break;
             }
-
             BlockStartImpl blockStart = findBlockStart(blockParser);
             if (blockStart == null) {
                 setNewIndex(nextNonSpace);
                 break;
             }
-
             startedNewBlock = true;
             int sourceIndex = getIndex();
-
             // We're starting a new block. If we have any previous blocks that need to be closed, we need to do it now.
             if (unmatchedBlocks > 0) {
                 closeBlockParsers(unmatchedBlocks);
                 unmatchedBlocks = 0;
             }
-
             if (blockStart.getNewIndex() != -1) {
                 setNewIndex(blockStart.getNewIndex());
             } else if (blockStart.getNewColumn() != -1) {
                 setNewColumn(blockStart.getNewColumn());
             }
-
             List<SourceSpan> replacedSourceSpans = null;
             if (blockStart.getReplaceParagraphLines() >= 1 || blockStart.isReplaceActiveBlockParser()) {
                 var activeBlockParser = getActiveBlockParser();
@@ -282,7 +235,6 @@ public class DocumentParser implements ParserState {
                     replacedSourceSpans = prepareActiveBlockParserForReplacement(activeBlockParser);
                 }
             }
-
             for (BlockParser newBlockParser : blockStart.getBlockParsers()) {
                 addChild(new OpenBlockParser(newBlockParser, sourceIndex));
                 if (replacedSourceSpans != null) {
@@ -292,24 +244,18 @@ public class DocumentParser implements ParserState {
                 tryBlockStarts = newBlockParser.isContainer();
             }
         }
-
         // What remains at the offset is a text line. Add the text to the
         // appropriate block.
-
         // First check for a lazy continuation line
-        if (!startedNewBlock && !isBlank() &&
-                getActiveBlockParser().canHaveLazyContinuationLines()) {
+        if (!startedNewBlock && !isBlank() && getActiveBlockParser().canHaveLazyContinuationLines()) {
             openBlockParsers.get(openBlockParsers.size() - 1).sourceIndex = lastIndex;
             // lazy paragraph continuation
             addLine();
-
         } else {
-
             // finalize any blocks not matched
             if (unmatchedBlocks > 0) {
                 closeBlockParsers(unmatchedBlocks);
             }
-
             if (!blockParser.isContainer()) {
                 addLine();
             } else if (!isBlank()) {
@@ -335,7 +281,6 @@ public class DocumentParser implements ParserState {
         index = 0;
         column = 0;
         columnIsInTab = false;
-
         String lineContent = prepareLine(ln);
         SourceSpan sourceSpan = null;
         if (includeSourceSpans != IncludeSourceSpans.NONE) {
@@ -347,12 +292,11 @@ public class DocumentParser implements ParserState {
     private void findNextNonSpace() {
         int i = index;
         int cols = column;
-
         blank = true;
         int length = line.getContent().length();
         while (i < length) {
             char c = line.getContent().charAt(i);
-            switch (c) {
+            switch(c) {
                 case ' ':
                     i++;
                     cols++;
@@ -365,7 +309,6 @@ public class DocumentParser implements ParserState {
             blank = false;
             break;
         }
-
         nextNonSpace = i;
         nextNonSpaceColumn = cols;
         indent = nextNonSpaceColumn - column;
@@ -482,7 +425,6 @@ public class DocumentParser implements ParserState {
     private void processInlines() {
         var context = new InlineParserContextImpl(inlineContentParserFactories, delimiterProcessors, linkProcessors, linkMarkers, definitions);
         var inlineParser = inlineParserFactory.create(context);
-
         for (var blockParser : allBlockParsers) {
             blockParser.parseInlines(inlineParser);
         }
@@ -496,7 +438,6 @@ public class DocumentParser implements ParserState {
         while (!getActiveBlockParser().canContain(openBlockParser.blockParser.getBlock())) {
             closeBlockParsers(1);
         }
-
         getActiveBlockParser().getBlock().appendChild(openBlockParser.blockParser.getBlock());
         activateBlockParser(openBlockParser);
     }
@@ -521,7 +462,6 @@ public class DocumentParser implements ParserState {
     private List<SourceSpan> prepareActiveBlockParserForReplacement(BlockParser blockParser) {
         // Note that we don't want to parse inlines here, as it's getting replaced.
         deactivateBlockParser();
-
         // Do this so that source positions are calculated, which we will carry over to the replacing block.
         blockParser.closeBlock();
         blockParser.getBlock().unlink();
@@ -581,21 +521,19 @@ public class DocumentParser implements ParserState {
 
         @Override
         public BlockParser getMatchedBlockParser() {
-            return matchedBlockParser;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public SourceLines getParagraphLines() {
-            if (matchedBlockParser instanceof ParagraphParser) {
-                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getParagraphLines();
-            }
-            return SourceLines.empty();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static class OpenBlockParser {
+
         private final BlockParser blockParser;
+
         private int sourceIndex;
 
         OpenBlockParser(BlockParser blockParser, int sourceIndex) {

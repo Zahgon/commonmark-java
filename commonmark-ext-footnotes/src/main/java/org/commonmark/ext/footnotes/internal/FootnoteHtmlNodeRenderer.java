@@ -7,7 +7,6 @@ import org.commonmark.node.*;
 import org.commonmark.renderer.NodeRenderer;
 import org.commonmark.renderer.html.HtmlNodeRendererContext;
 import org.commonmark.renderer.html.HtmlWriter;
-
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -51,6 +50,7 @@ import java.util.function.Consumer;
 public class FootnoteHtmlNodeRenderer implements NodeRenderer {
 
     private final HtmlWriter html;
+
     private final HtmlNodeRendererContext context;
 
     /**
@@ -76,87 +76,22 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<Class<? extends Node>> getNodeTypes() {
-        return Set.of(FootnoteReference.class, InlineFootnote.class, FootnoteDefinition.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void beforeRoot(Node rootNode) {
-        // Collect all definitions first, so we can look them up when encountering a reference later.
-        var visitor = new DefinitionVisitor();
-        rootNode.accept(visitor);
-        definitionMap = visitor.definitions;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void render(Node node) {
-        if (node instanceof FootnoteReference) {
-            // This is called for all references, even ones inside definitions that we render at the end.
-            // Inside definitions, we have registered the reference already.
-            var ref = (FootnoteReference) node;
-            // Use containsKey because if value is null, we don't need to try registering again.
-            var info = references.containsKey(ref) ? references.get(ref) : tryRegisterReference(ref);
-            if (info != null) {
-                renderReference(ref, info);
-            } else {
-                // A reference without a corresponding definition is rendered as plain text
-                html.text("[^" + ref.getLabel() + "]");
-            }
-        } else if (node instanceof InlineFootnote) {
-            var info = references.get(node);
-            if (info == null) {
-                info = registerReference(node, null);
-            }
-            renderReference(node, info);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void afterRoot(Node rootNode) {
-        // Now render the referenced definitions if there are any.
-        if (referencedDefinitions.isEmpty()) {
-            return;
-        }
-
-        var firstDef = referencedDefinitions.keySet().iterator().next();
-        var attrs = new LinkedHashMap<String, String>();
-        attrs.put("class", "footnotes");
-        attrs.put("data-footnotes", null);
-        html.tag("section", context.extendAttributes(firstDef, "section", attrs));
-        html.line();
-        html.tag("ol");
-        html.line();
-
-        // Check whether there are any footnotes inside the definitions that we're about to render. For those, we might
-        // need to render more definitions. So do a breadth-first search to find all relevant definitions.
-        var check = new LinkedList<>(referencedDefinitions.keySet());
-        while (!check.isEmpty()) {
-            var def = check.removeFirst();
-            def.accept(new ShallowReferenceVisitor(def, node -> {
-                if (node instanceof FootnoteReference) {
-                    var ref = (FootnoteReference) node;
-                    var d = definitionMap.get(ref.getLabel());
-                    if (d != null) {
-                        if (!referencedDefinitions.containsKey(d)) {
-                            check.addLast(d);
-                        }
-                        references.put(ref, registerReference(d, d.getLabel()));
-                    }
-                } else if (node instanceof InlineFootnote) {
-                    check.addLast(node);
-                    references.put(node, registerReference(node, null));
-                }
-            }));
-        }
-
-        for (var entry : referencedDefinitions.entrySet()) {
-            // This will also render any footnote references inside definitions
-            renderDefinition(entry.getKey(), entry.getValue());
-        }
-
-        html.tag("/ol");
-        html.line();
-        html.tag("/section");
-        html.line();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private ReferenceInfo tryRegisterReference(FootnoteReference ref) {
@@ -182,13 +117,11 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
         var definitionKey = referencedDef.definitionKey;
         var id = referenceId(definitionKey, refNumber);
         referencedDef.references.add(id);
-
         return new ReferenceInfo(id, definitionId(definitionKey), definitionNumber);
     }
 
     private void renderReference(Node node, ReferenceInfo referenceInfo) {
         html.tag("sup", context.extendAttributes(node, "sup", Map.of("class", "footnote-ref")));
-
         var href = "#" + referenceInfo.definitionId;
         var attrs = new LinkedHashMap<String, String>();
         attrs.put("href", href);
@@ -205,7 +138,6 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
         attrs.put("id", definitionId(referencedDefinition.definitionKey));
         html.tag("li", context.extendAttributes(def, "li", attrs));
         html.line();
-
         if (def.getLastChild() instanceof Paragraph) {
             // Add backlinks into last paragraph before </p>. This is what GFM does.
             var lastParagraph = (Paragraph) def.getLastChild();
@@ -223,7 +155,6 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
                 }
                 node = node.getNext();
             }
-
             html.tag("p", context.extendAttributes(lastParagraph, "p", Map.of()));
             renderChildren(lastParagraph);
             html.raw(" ");
@@ -242,7 +173,6 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
             html.line();
             renderBackrefs(def, referencedDefinition);
         }
-
         html.tag("/li");
         html.line();
     }
@@ -253,7 +183,6 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
             var ref = refs.get(i);
             var refNumber = i + 1;
             var idx = referencedDefinition.definitionNumber + (refNumber > 1 ? ("-" + refNumber) : "");
-
             var attrs = new LinkedHashMap<String, String>();
             attrs.put("href", "#" + ref);
             attrs.put("class", "footnote-backref");
@@ -308,12 +237,7 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
 
         @Override
         public void visit(CustomBlock customBlock) {
-            if (customBlock instanceof FootnoteDefinition) {
-                var def = (FootnoteDefinition) customBlock;
-                definitions.putIfAbsent(def.getLabel(), def);
-            } else {
-                super.visit(customBlock);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -322,7 +246,9 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
      * because the caller wants to control when to descend.
      */
     private static class ShallowReferenceVisitor extends AbstractVisitor {
+
         private final Node parent;
+
         private final Consumer<Node> consumer;
 
         private ShallowReferenceVisitor(Node parent, Consumer<Node> consumer) {
@@ -332,31 +258,22 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
 
         @Override
         public void visit(CustomNode customNode) {
-            if (customNode instanceof FootnoteReference) {
-                consumer.accept(customNode);
-            } else if (customNode instanceof InlineFootnote) {
-                if (customNode == parent) {
-                    // Descend into the parent (inline footnotes can contain inline footnotes)
-                    super.visit(customNode);
-                } else {
-                    // Don't descend here because we want to be shallow.
-                    consumer.accept(customNode);
-                }
-            } else {
-                super.visit(customNode);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static class ReferencedDefinition {
+
         /**
          * The definition number, starting from 1, and in order in which they're referenced.
          */
         final int definitionNumber;
+
         /**
          * The unique key of the definition. Together with a static prefix it forms the ID used in the HTML.
          */
         final String definitionKey;
+
         /**
          * The IDs of references for this definition, for backrefs.
          */
@@ -369,14 +286,17 @@ public class FootnoteHtmlNodeRenderer implements NodeRenderer {
     }
 
     private static class ReferenceInfo {
+
         /**
          * The ID of the reference; in the corresponding definition, a link back to this reference will be rendered.
          */
         private final String id;
+
         /**
          * The ID of the definition, for linking to the definition.
          */
         private final String definitionId;
+
         /**
          * The definition number, rendered in superscript.
          */

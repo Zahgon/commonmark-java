@@ -6,16 +6,18 @@ import org.commonmark.node.FencedCodeBlock;
 import org.commonmark.parser.SourceLine;
 import org.commonmark.parser.block.*;
 import org.commonmark.text.Characters;
-
 import static org.commonmark.internal.util.Escaping.unescapeString;
 
 public class FencedCodeBlockParser extends AbstractBlockParser {
 
     private final FencedCodeBlock block = new FencedCodeBlock();
+
     private final char fenceChar;
+
     private final int openingFenceLength;
 
     private String firstLine;
+
     private StringBuilder otherLines = new StringBuilder();
 
     public FencedCodeBlockParser(char fenceChar, int fenceLength, int fenceIndent) {
@@ -28,62 +30,29 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
 
     @Override
     public Block getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        int nextNonSpace = state.getNextNonSpaceIndex();
-        int newIndex = state.getIndex();
-        CharSequence line = state.getLine().getContent();
-        if (state.getIndent() < Parsing.CODE_BLOCK_INDENT && nextNonSpace < line.length() && tryClosing(line, nextNonSpace)) {
-            // closing fence - we're at end of line, so we can finalize now
-            return BlockContinue.finished();
-        } else {
-            // skip optional spaces of fence indent
-            int i = block.getFenceIndent();
-            int length = line.length();
-            while (i > 0 && newIndex < length && line.charAt(newIndex) == ' ') {
-                newIndex++;
-                i--;
-            }
-        }
-        return BlockContinue.atIndex(newIndex);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void addLine(SourceLine line) {
-        if (firstLine == null) {
-            firstLine = line.getContent().toString();
-        } else {
-            otherLines.append(line.getContent());
-            otherLines.append('\n');
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void closeBlock() {
-        // first line becomes info string
-        block.setInfo(unescapeString(firstLine.trim()));
-        block.setLiteral(otherLines.toString());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Factory extends AbstractBlockParserFactory {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            int indent = state.getIndent();
-            if (indent >= Parsing.CODE_BLOCK_INDENT) {
-                return BlockStart.none();
-            }
-
-            int nextNonSpace = state.getNextNonSpaceIndex();
-            FencedCodeBlockParser blockParser = checkOpener(state.getLine().getContent(), nextNonSpace, indent);
-            if (blockParser != null) {
-                return BlockStart.of(blockParser).atIndex(nextNonSpace + blockParser.block.getOpeningFenceLength());
-            } else {
-                return BlockStart.none();
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -93,9 +62,8 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         int backticks = 0;
         int tildes = 0;
         int length = line.length();
-        loop:
-        for (int i = index; i < length; i++) {
-            switch (line.charAt(i)) {
+        loop: for (int i = index; i < length; i++) {
+            switch(line.charAt(i)) {
                 case '`':
                     backticks++;
                     break;

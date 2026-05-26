@@ -20,21 +20,21 @@ public class Emphasis extends Node implements Delimited {
     }
 
     public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getOpeningDelimiter() {
-        return delimiter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getClosingDelimiter() {
-        return delimiter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

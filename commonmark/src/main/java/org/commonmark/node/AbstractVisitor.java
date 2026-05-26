@@ -10,117 +10,117 @@ public abstract class AbstractVisitor implements Visitor {
 
     @Override
     public void visit(BlockQuote blockQuote) {
-        visitChildren(blockQuote);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(BulletList bulletList) {
-        visitChildren(bulletList);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Code code) {
-        visitChildren(code);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Document document) {
-        visitChildren(document);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Emphasis emphasis) {
-        visitChildren(emphasis);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(FencedCodeBlock fencedCodeBlock) {
-        visitChildren(fencedCodeBlock);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(HardLineBreak hardLineBreak) {
-        visitChildren(hardLineBreak);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Heading heading) {
-        visitChildren(heading);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(ThematicBreak thematicBreak) {
-        visitChildren(thematicBreak);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(HtmlInline htmlInline) {
-        visitChildren(htmlInline);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(HtmlBlock htmlBlock) {
-        visitChildren(htmlBlock);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Image image) {
-        visitChildren(image);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(IndentedCodeBlock indentedCodeBlock) {
-        visitChildren(indentedCodeBlock);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Link link) {
-        visitChildren(link);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(ListItem listItem) {
-        visitChildren(listItem);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(OrderedList orderedList) {
-        visitChildren(orderedList);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Paragraph paragraph) {
-        visitChildren(paragraph);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(SoftLineBreak softLineBreak) {
-        visitChildren(softLineBreak);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(StrongEmphasis strongEmphasis) {
-        visitChildren(strongEmphasis);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(Text text) {
-        visitChildren(text);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(LinkReferenceDefinition linkReferenceDefinition) {
-        visitChildren(linkReferenceDefinition);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(CustomBlock customBlock) {
-        visitChildren(customBlock);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void visit(CustomNode customNode) {
-        visitChildren(customNode);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -129,13 +129,6 @@ public abstract class AbstractVisitor implements Visitor {
      * @param parent the parent node whose children should be visited
      */
     protected void visitChildren(Node parent) {
-        Node node = parent.getFirstChild();
-        while (node != null) {
-            // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
-            // node after visiting it. So get the next node before visiting.
-            Node next = node.getNext();
-            node.accept(this);
-            node = next;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

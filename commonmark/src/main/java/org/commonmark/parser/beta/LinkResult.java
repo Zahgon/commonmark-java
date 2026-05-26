@@ -7,11 +7,12 @@ import org.commonmark.node.Node;
  * What to do with a link/image processed by {@link LinkProcessor}.
  */
 public interface LinkResult {
+
     /**
      * Link not handled by processor.
      */
     static LinkResult none() {
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -26,7 +27,7 @@ public interface LinkResult {
      * @param position the position to continue parsing from
      */
     static LinkResult wrapTextIn(Node node, Position position) {
-        return new LinkResultImpl(LinkResultImpl.Type.WRAP, node, position);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -40,7 +41,7 @@ public interface LinkResult {
      * @param position the position to continue parsing from
      */
     static LinkResult replaceWith(Node node, Position position) {
-        return new LinkResultImpl(LinkResultImpl.Type.REPLACE, node, position);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

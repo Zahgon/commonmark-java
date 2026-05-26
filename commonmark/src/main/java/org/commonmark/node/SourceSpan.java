@@ -26,12 +26,15 @@ import java.util.Objects;
 public class SourceSpan {
 
     private final int lineIndex;
+
     private final int columnIndex;
+
     private final int inputIndex;
+
     private final int length;
 
     public static SourceSpan of(int line, int col, int input, int length) {
-        return new SourceSpan(line, col, input, length);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,7 +69,7 @@ public class SourceSpan {
      * @return 0-based line index, e.g. 0 for first line, 1 for the second line, etc
      */
     public int getLineIndex() {
-        return lineIndex;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -74,7 +77,7 @@ public class SourceSpan {
      * the second character, etc
      */
     public int getColumnIndex() {
-        return columnIndex;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,69 +85,36 @@ public class SourceSpan {
      * @since 0.24.0
      */
     public int getInputIndex() {
-        return inputIndex;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return length of the span in characters
      */
     public int getLength() {
-        return length;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SourceSpan subSpan(int beginIndex) {
-        return subSpan(beginIndex, length);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SourceSpan subSpan(int beginIndex, int endIndex) {
-        if (beginIndex < 0) {
-            throw new IndexOutOfBoundsException("beginIndex " + beginIndex + " + must be >= 0");
-        }
-        if (beginIndex > length) {
-            throw new IndexOutOfBoundsException("beginIndex " + beginIndex + " must be <= length " + length);
-        }
-        if (endIndex < 0) {
-            throw new IndexOutOfBoundsException("endIndex " + endIndex + " + must be >= 0");
-        }
-        if (endIndex > length) {
-            throw new IndexOutOfBoundsException("endIndex " + endIndex + " must be <= length " + length);
-        }
-        if (beginIndex > endIndex) {
-            throw new IndexOutOfBoundsException("beginIndex " + beginIndex + " must be <= endIndex " + endIndex);
-        }
-        if (beginIndex == 0 && endIndex == length) {
-            return this;
-        }
-        return new SourceSpan(lineIndex, columnIndex + beginIndex, inputIndex + beginIndex, endIndex - beginIndex);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        SourceSpan that = (SourceSpan) o;
-        return lineIndex == that.lineIndex &&
-                columnIndex == that.columnIndex &&
-                inputIndex == that.inputIndex &&
-                length == that.length;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lineIndex, columnIndex, inputIndex, length);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return "SourceSpan{" +
-                "line=" + lineIndex +
-                ", column=" + columnIndex +
-                ", input=" + inputIndex +
-                ", length=" + length +
-                "}";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

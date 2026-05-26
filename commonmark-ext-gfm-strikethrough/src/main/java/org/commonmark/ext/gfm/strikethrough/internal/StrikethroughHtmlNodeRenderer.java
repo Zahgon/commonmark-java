@@ -3,12 +3,12 @@ package org.commonmark.ext.gfm.strikethrough.internal;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.html.HtmlNodeRendererContext;
 import org.commonmark.renderer.html.HtmlWriter;
-
 import java.util.Map;
 
 public class StrikethroughHtmlNodeRenderer extends StrikethroughNodeRenderer {
 
     private final HtmlNodeRendererContext context;
+
     private final HtmlWriter html;
 
     public StrikethroughHtmlNodeRenderer(HtmlNodeRendererContext context) {
@@ -18,10 +18,7 @@ public class StrikethroughHtmlNodeRenderer extends StrikethroughNodeRenderer {
 
     @Override
     public void render(Node node) {
-        Map<String, String> attributes = context.extendAttributes(node, "del", Map.of());
-        html.tag("del", attributes);
-        renderChildren(node);
-        html.tag("/del");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void renderChildren(Node parent) {

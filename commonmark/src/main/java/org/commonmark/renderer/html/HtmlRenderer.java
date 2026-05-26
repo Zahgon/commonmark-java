@@ -5,7 +5,6 @@ import org.commonmark.internal.renderer.NodeRendererMap;
 import org.commonmark.internal.util.Escaping;
 import org.commonmark.node.*;
 import org.commonmark.renderer.Renderer;
-
 import java.util.*;
 
 /**
@@ -20,12 +19,19 @@ import java.util.*;
 public class HtmlRenderer implements Renderer {
 
     private final String softbreak;
+
     private final boolean escapeHtml;
+
     private final boolean percentEncodeUrls;
+
     private final boolean omitSingleParagraphP;
+
     private final boolean sanitizeUrls;
+
     private final UrlSanitizer urlSanitizer;
+
     private final List<AttributeProviderFactory> attributeProviderFactories;
+
     private final List<HtmlNodeRendererFactory> nodeRendererFactories;
 
     private HtmlRenderer(Builder builder) {
@@ -36,7 +42,6 @@ public class HtmlRenderer implements Renderer {
         this.sanitizeUrls = builder.sanitizeUrls;
         this.urlSanitizer = builder.urlSanitizer;
         this.attributeProviderFactories = new ArrayList<>(builder.attributeProviderFactories);
-
         this.nodeRendererFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
         this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
         // Add as last. This means clients can override the rendering of core nodes if they want.
@@ -49,24 +54,17 @@ public class HtmlRenderer implements Renderer {
      * @return a builder
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void render(Node node, Appendable output) {
-        Objects.requireNonNull(node, "node must not be null");
-        RendererContext context = new RendererContext(new HtmlWriter(output));
-        context.beforeRoot(node);
-        context.render(node);
-        context.afterRoot(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String render(Node node) {
-        Objects.requireNonNull(node, "node must not be null");
-        StringBuilder sb = new StringBuilder();
-        render(node, sb);
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -75,19 +73,26 @@ public class HtmlRenderer implements Renderer {
     public static class Builder {
 
         private String softbreak = "\n";
+
         private boolean escapeHtml = false;
+
         private boolean sanitizeUrls = false;
+
         private UrlSanitizer urlSanitizer = new DefaultUrlSanitizer();
+
         private boolean percentEncodeUrls = false;
+
         private boolean omitSingleParagraphP = false;
+
         private List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
+
         private List<HtmlNodeRendererFactory> nodeRendererFactories = new ArrayList<>();
 
         /**
          * @return the configured {@link HtmlRenderer}
          */
         public HtmlRenderer build() {
-            return new HtmlRenderer(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -102,8 +107,7 @@ public class HtmlRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder softbreak(String softbreak) {
-            this.softbreak = softbreak;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -116,8 +120,7 @@ public class HtmlRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder escapeHtml(boolean escapeHtml) {
-            this.escapeHtml = escapeHtml;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -128,8 +131,7 @@ public class HtmlRenderer implements Renderer {
          * @since 0.14.0
          */
         public Builder sanitizeUrls(boolean sanitizeUrls) {
-            this.sanitizeUrls = sanitizeUrls;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -140,8 +142,7 @@ public class HtmlRenderer implements Renderer {
          * @since 0.14.0
          */
         public Builder urlSanitizer(UrlSanitizer urlSanitizer) {
-            this.urlSanitizer = urlSanitizer;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -159,8 +160,7 @@ public class HtmlRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder percentEncodeUrls(boolean percentEncodeUrls) {
-            this.percentEncodeUrls = percentEncodeUrls;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -170,8 +170,7 @@ public class HtmlRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder omitSingleParagraphP(boolean omitSingleParagraphP) {
-            this.omitSingleParagraphP = omitSingleParagraphP;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -181,9 +180,7 @@ public class HtmlRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
-            Objects.requireNonNull(attributeProviderFactory, "attributeProviderFactory must not be null");
-            this.attributeProviderFactories.add(attributeProviderFactory);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -197,9 +194,7 @@ public class HtmlRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder nodeRendererFactory(HtmlNodeRendererFactory nodeRendererFactory) {
-            Objects.requireNonNull(nodeRendererFactory, "nodeRendererFactory must not be null");
-            this.nodeRendererFactories.add(nodeRendererFactory);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -207,14 +202,7 @@ public class HtmlRenderer implements Renderer {
          * @return {@code this}
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
-            Objects.requireNonNull(extensions, "extensions must not be null");
-            for (Extension extension : extensions) {
-                if (extension instanceof HtmlRendererExtension) {
-                    HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
-                    htmlRendererExtension.extend(this);
-                }
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -222,23 +210,24 @@ public class HtmlRenderer implements Renderer {
      * Extension for {@link HtmlRenderer}.
      */
     public interface HtmlRendererExtension extends Extension {
+
         void extend(Builder rendererBuilder);
     }
 
     private class RendererContext implements HtmlNodeRendererContext, AttributeProviderContext {
 
         private final HtmlWriter htmlWriter;
+
         private final List<AttributeProvider> attributeProviders;
+
         private final NodeRendererMap nodeRendererMap = new NodeRendererMap();
 
         private RendererContext(HtmlWriter htmlWriter) {
             this.htmlWriter = htmlWriter;
-
             attributeProviders = new ArrayList<>(attributeProviderFactories.size());
             for (var attributeProviderFactory : attributeProviderFactories) {
                 attributeProviders.add(attributeProviderFactory.create(this));
             }
-
             for (var factory : nodeRendererFactories) {
                 var renderer = factory.create(this);
                 nodeRendererMap.add(renderer);
@@ -247,61 +236,55 @@ public class HtmlRenderer implements Renderer {
 
         @Override
         public boolean shouldEscapeHtml() {
-            return escapeHtml;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean shouldOmitSingleParagraphP() {
-            return omitSingleParagraphP;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean shouldSanitizeUrls() {
-            return sanitizeUrls;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public UrlSanitizer urlSanitizer() {
-            return urlSanitizer;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String encodeUrl(String url) {
-            if (percentEncodeUrls) {
-                return Escaping.percentEncodeUrl(url);
-            } else {
-                return url;
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Map<String, String> extendAttributes(Node node, String tagName, Map<String, String> attributes) {
-            Map<String, String> attrs = new LinkedHashMap<>(attributes);
-            setCustomAttributes(node, tagName, attrs);
-            return attrs;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public HtmlWriter getWriter() {
-            return htmlWriter;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String getSoftbreak() {
-            return softbreak;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void render(Node node) {
-            nodeRendererMap.render(node);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public void beforeRoot(Node node) {
-            nodeRendererMap.beforeRoot(node);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public void afterRoot(Node node) {
-            nodeRendererMap.afterRoot(node);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         private void setCustomAttributes(Node node, String tagName, Map<String, String> attrs) {

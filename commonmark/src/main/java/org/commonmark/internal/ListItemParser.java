@@ -28,48 +28,21 @@ public class ListItemParser extends AbstractBlockParser {
 
     @Override
     public boolean isContainer() {
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canContain(Block childBlock) {
-        if (hadBlankLine) {
-            // We saw a blank line in this list item, that means the list block is loose.
-            //
-            // spec: if any of its constituent list items directly contain two block-level elements with a blank line
-            // between them
-            Block parent = block.getParent();
-            if (parent instanceof ListBlock) {
-                ((ListBlock) parent).setTight(false);
-            }
-        }
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Block getBlock() {
-        return block;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        if (state.isBlank()) {
-            if (block.getFirstChild() == null) {
-                // Blank line after empty list item
-                return BlockContinue.none();
-            } else {
-                Block activeBlock = state.getActiveBlockParser().getBlock();
-                // If the active block is a code block, blank lines in it should not affect if the list is tight.
-                hadBlankLine = activeBlock instanceof Paragraph || activeBlock instanceof ListItem;
-                return BlockContinue.atIndex(state.getNextNonSpaceIndex());
-            }
-        }
-
-        if (state.getIndent() >= contentIndent) {
-            return BlockContinue.atColumn(state.getColumn() + contentIndent);
-        } else {
-            // Note: We'll hit this case for lazy continuation lines, they will get added later.
-            return BlockContinue.none();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

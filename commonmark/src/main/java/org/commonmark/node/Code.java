@@ -21,7 +21,7 @@ public class Code extends Node {
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -29,10 +29,10 @@ public class Code extends Node {
      * e.g. when spaces are stripped)
      */
     public String getLiteral() {
-        return literal;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLiteral(String literal) {
-        this.literal = literal;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

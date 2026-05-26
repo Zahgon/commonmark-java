@@ -16,11 +16,11 @@ public class Strikethrough extends CustomNode implements Delimited {
 
     @Override
     public String getOpeningDelimiter() {
-        return delimiter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getClosingDelimiter() {
-        return delimiter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
